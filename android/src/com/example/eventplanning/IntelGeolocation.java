@@ -53,7 +53,6 @@ public abstract class IntelGeolocation
 	        Log.e("Test", e.toString());
 	        return "";
 	    }
-		return "";   
-	    
+		return "";   	    
 	}
 }
