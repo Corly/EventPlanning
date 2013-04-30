@@ -16,15 +16,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.smartIntern.server.AuthData;
+/*import com.smartIntern.server.AuthData;
 import com.smartIntern.server.IntelWebService;
 import com.smartIntern.server.POILocation;
-import com.smartIntern.server.IntelWebService.OnResponseListener;
+import com.smartIntern.server.IntelWebService.OnResponseListener;*/
 
 public class MainActivity extends Activity 
 {
 	
-	private AuthData data;
+	/*private AuthData data;*/
 	private ListBox list;
 	private Button btn;
 	private GlobalPositioning GP;
@@ -34,7 +34,7 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getAuthData();
+	//	getAuthData();
 		btn = (Button)findViewById(R.id.button1);
 		btn.setClickable(false);
 		list = (ListBox) findViewById(R.id.listBox1);
@@ -56,7 +56,7 @@ public class MainActivity extends Activity
 		
 	}
 	
-	private void getAuthData()
+	/*private void getAuthData()
 	{
 		IntelWebService.getInstance().getOauth20Token(new OnResponseListener<AuthData>() {
 			   @Override
@@ -89,7 +89,7 @@ public class MainActivity extends Activity
 			Log.d("TAG","Error??");			
 		}		
 	};	
-	
+*/	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,7 +104,7 @@ public class MainActivity extends Activity
 		if (location == null) return;
 		TextView t = (TextView)findViewById(R.id.textView1);		
 		t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
-		IntelWebService.getInstance().getNearByPOIs("POI_ALL", location.getLatitude(), location.getLongitude(), "10000",responseListener);
+//		IntelWebService.getInstance().getNearByPOIs("POI_ALL", location.getLatitude(), location.getLongitude(), "10000",responseListener);
 		
 	}
 
