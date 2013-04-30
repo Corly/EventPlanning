@@ -3,6 +3,7 @@ package com.smartIntern.server;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class UserAuth implements JsonReadable{
 	private String token;
 	private String refreshToken;
