@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.smartIntern.server.AuthData;
@@ -21,9 +24,10 @@ import com.smartIntern.server.IntelWebService.OnResponseListener;
 public class MainActivity extends Activity 
 {
 	
-	AuthData data;
-	ListBox list;
-	GlobalPositioning GP;
+	private AuthData data;
+	private ListBox list;
+	private Button btn;
+	private GlobalPositioning GP;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -31,9 +35,25 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getAuthData();
-		GP = new GlobalPositioning(this);
-		GP.getLocation();
+		btn = (Button)findViewById(R.id.button1);
+		btn.setClickable(false);
 		list = (ListBox) findViewById(R.id.listBox1);
+		SearchMyLocation();
+	}
+	
+	void SearchMyLocation()
+	{
+		Location location;
+		while(true)
+		{
+			GP = new GlobalPositioning(this);
+			location = GP.getLocation();
+			if (location != null) break;
+		}
+		TextView t = (TextView)findViewById(R.id.textView1);		
+		t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
+		btn.setClickable(true);
+		
 	}
 	
 	private void getAuthData()
@@ -82,8 +102,7 @@ public class MainActivity extends Activity
 	{
 		Location location = GP.getLocation();
 		if (location == null) return;
-		TextView t = (TextView)findViewById(R.id.textView1);
-		
+		TextView t = (TextView)findViewById(R.id.textView1);		
 		t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
 		IntelWebService.getInstance().getNearByPOIs("POI_ALL", location.getLatitude(), location.getLongitude(), "10000",responseListener);
 		
