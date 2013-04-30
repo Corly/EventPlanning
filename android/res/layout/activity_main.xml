@@ -20,8 +20,18 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="26dp"
-        android:text="Button" 
-        android:onClick="Click"/>
+        android:layout_marginTop="16dp"
+        android:onClick="Click"
+        android:text="Button" />
+
+    <com.example.eventplanning.ListBox
+        android:id="@+id/listBox1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1" >
+
+    </com.example.eventplanning.ListBox>
 
 </RelativeLayout>

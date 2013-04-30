@@ -18,7 +18,7 @@ public class GlobalPositioning extends Service implements LocationListener
 	private LocationManager manager;
 	private Context context;
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 metrii
-    private static final long MIN_TIME_BW_UPDATES = 1000  * 60 * 1; // 1 minut
+    private static final long MIN_TIME_BW_UPDATES = 1000  * 1; // 1 minut
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
     private boolean locationCanBeObtained = false;
@@ -69,8 +69,6 @@ public class GlobalPositioning extends Service implements LocationListener
 			ShowSettingsAlert();
 			return null;
 		}		
-		manager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-		
 		if (isNetworkEnabled) 
 		{
 			if (lastKnownLocation == null)
@@ -82,9 +80,7 @@ public class GlobalPositioning extends Service implements LocationListener
 				lastKnownLocation = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 			}
 			Log.d("GPS","Got Location from Networking");
-		}
-		
-		if (isGPSEnabled) 
+		}else if (isGPSEnabled) 
 		{
 			if (lastKnownLocation == null)
 			{
@@ -114,17 +110,11 @@ public class GlobalPositioning extends Service implements LocationListener
 	@Override
 	public void onProviderDisabled(String arg0)
 	{
-		isGPSEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		isNetworkEnabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		locationCanBeObtained = isGPSEnabled || isNetworkEnabled;
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0)
 	{
-		isGPSEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		isNetworkEnabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		locationCanBeObtained = isGPSEnabled || isNetworkEnabled;
 	}
 
 	@Override

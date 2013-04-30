@@ -63,7 +63,7 @@ public class IntelWebService {
 	private HashMap<String, String> defaultHeaderParams;
 	private DecimalFormat geoCoordinatesDecimalFormat;
 	
-	private IntelWebService() {
+	public IntelWebService() {
 		defaultHeaderParams = new HashMap<String, String>();
 		defaultHeaderParams.put("Accept", "application/json");
 		
@@ -215,15 +215,15 @@ public class IntelWebService {
 							locations.add(location);
 						}
 						return locations;
-					} else {
-						// TODO - handle error
+					} else 
+					{
 						return null;
 					}
 				} catch (JSONException e) {
 					// TODO - handle error
 					Log.w(IntelWebService.class.getSimpleName(), e);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					Log.w(IntelWebService.class.getSimpleName(), e);
 				}
 				return null;
