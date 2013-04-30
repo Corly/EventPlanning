@@ -1,14 +1,18 @@
 package com.example.eventplanning;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity 
+{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);		
 	}
@@ -24,7 +28,7 @@ public class MainActivity extends Activity {
 	
 	public void Click(View  v)
 	{
-		GlobalPositioning m = new GlobalPositioning();
+		
 	}
 
 }
