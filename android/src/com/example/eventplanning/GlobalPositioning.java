@@ -17,8 +17,8 @@ public class GlobalPositioning extends Service implements LocationListener
 {
 	private LocationManager manager;
 	private Context context;
-	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 metrii
+    private static final long MIN_TIME_BW_UPDATES = 1000  * 60 * 1; // 1 minut
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
     private boolean locationCanBeObtained = false;
@@ -35,7 +35,7 @@ public class GlobalPositioning extends Service implements LocationListener
 		this.getLocation();
 	}
 	
-	void ShowSettingsAlert()
+	private void ShowSettingsAlert()
 	{
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle("GPS & Network settings");
@@ -56,7 +56,7 @@ public class GlobalPositioning extends Service implements LocationListener
         alertDialog.show();
 	}
 	
-	Location getLocation()
+	public Location getLocation()
 	{
 		
 		isGPSEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -68,20 +68,8 @@ public class GlobalPositioning extends Service implements LocationListener
 		{
 			ShowSettingsAlert();
 			return null;
-		}
-		
+		}		
 		manager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-		if (isGPSEnabled) 
-		{
-			if (lastKnownLocation == null)
-			{
-				manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this); 
-			}
-			if (manager != null)
-			{
-				lastKnownLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			}
-		}
 		
 		if (isNetworkEnabled) 
 		{
@@ -93,27 +81,50 @@ public class GlobalPositioning extends Service implements LocationListener
 			{
 				lastKnownLocation = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 			}
+			Log.d("GPS","Got Location from Networking");
+		}
+		
+		if (isGPSEnabled) 
+		{
+			if (lastKnownLocation == null)
+			{
+				manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this); 
+			}
+			if (manager != null)
+			{
+				lastKnownLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			}
+			Log.d("GPS","Got Location from GPS");
 		}
 		
 		return lastKnownLocation;
 	}
 
-	@Override
-	public void onLocationChanged(Location arg0)
+	public Location getLastKnownLocation()
 	{
-		
+		return lastKnownLocation;
+	}
+	
+	@Override
+	public void onLocationChanged(Location t)
+	{
+		lastKnownLocation = t;
 	}
 
 	@Override
 	public void onProviderDisabled(String arg0)
 	{
-		
+		isGPSEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isNetworkEnabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		locationCanBeObtained = isGPSEnabled || isNetworkEnabled;
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0)
 	{
-		
+		isGPSEnabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		isNetworkEnabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		locationCanBeObtained = isGPSEnabled || isNetworkEnabled;
 	}
 
 	@Override
