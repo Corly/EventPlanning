@@ -20,11 +20,9 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-
-
-public class ApiHandler {
-	private static final String BASE_URL = "https://api.intel.com:8081/";
-	
+public class ApiHandler 
+{
+	private static final String BASE_URL = "https://api.intel.com:8081/";	
 	private static final String URL_PARAM_ACCESS_TOKEN = "{access_token}";
 	private static final String URL_PARAM_POI_CATEGORY = "{category}";
 	private static final String URL_PARAM_LATITUDE = "{latitude}";
@@ -43,8 +41,8 @@ public class ApiHandler {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 */
-	public static String getHTTP(String url, Context context)
-			throws ClientProtocolException, IOException {
+	public static String getHTTP(String url, Context context) throws ClientProtocolException, IOException 
+	{
 
 		StringBuilder responseBuilder = new StringBuilder();
 
@@ -56,16 +54,18 @@ public class ApiHandler {
 		/** Send request */
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);
+		
 		//not sure if casting will result to something that we want
-		HttpResponse response = (HttpResponse) httpclient.execute(request);
+		
+		HttpResponse response = httpclient.execute(request);
 		InputStream data = response.getEntity().getContent();
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(data));
 		String responeLine;
-		while ((responeLine = bufferedReader.readLine()) != null) {
+		while ((responeLine = bufferedReader.readLine()) != null) 
+		{
 			responseBuilder.append(responeLine);
 		}
-
 		return responseBuilder.toString();
 	}
 
@@ -76,24 +76,29 @@ public class ApiHandler {
 	 * @param request
 	 * @return the server's reply @see ServerResponse
 	 */
-	public static ServerResponse get(String req, Context context) {
+	public static ServerResponse get(String req, Context context) 
+	{
 		JSONObject jObject;
 		String info;
 		ServerResponse result = new ServerResponse();
 
-		try {
+		try 
+		{
 			info = getHTTP(req, context);
-		} catch (Exception e1) {
+		} catch (Exception e1) 
+		{
 			result.setStatus(false);
 			result.setError("Server communication error.");
 			return result;
 		}
 
-		try {
+		try 
+		{
 			jObject = new JSONObject(info);
 			result.setData(jObject);
 		result.setStatus(true);
-		} catch (JSONException e) {
+		} catch (JSONException e) 
+		{
 			result.setStatus(false);
 			result.setError("Server response format error.");
 			return result;
@@ -109,23 +114,24 @@ public class ApiHandler {
 	 * @return The server's reply @see ServerResponse
 	 */
 	public static ServerResponse getArray(String req, Context context) {
-		JSONArray jObject;
-		String info;
 		ServerResponse result = new ServerResponse();
 
-		try {
-			info = getHTTP(req, context);
+		try 
+		{
+			result = get(req, context);
 		} catch (Exception e1) {
 			result.setStatus(false);
 			result.setError("Server communication error.");
 			return result;
 		}
-
-		try {
-			jObject = new JSONArray(info);
-			result.setArrayData(jObject);
-			result.setStatus(true);
-		} catch (JSONException e) {
+		
+		try 
+		{
+			JSONObject m = new JSONObject(result.getData().getString("data"));
+			JSONArray array = m.getJSONArray("items");
+			result.setArrayData(array);
+		} catch (JSONException e) 
+		{
 			result.setStatus(false);
 			result.setError("Server response format error.");
 			return result;
@@ -145,9 +151,8 @@ public class ApiHandler {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 */
-	public static HttpResponse postHttp(String host, List<NameValuePair> data,
-			Context context) throws 
-			ClientProtocolException, IOException {
+	public static HttpResponse postHttp(String host, List<NameValuePair> data, Context context) throws ClientProtocolException, IOException 
+	{
 		String url = host;
 		HttpPost httpost = new HttpPost(url);
 		HttpResponse res = null;
@@ -161,7 +166,8 @@ public class ApiHandler {
 	}
 	
 	public static ServerResponse sendPost(String host,
-			List<NameValuePair> data, Context context) {
+			List<NameValuePair> data, Context context) 
+	{
 		HttpResponse httpRes;
 		ServerResponse res = new ServerResponse();
 
