@@ -16,7 +16,7 @@ public class UrlCreator
 	private String baseURL = "https://api.intel.com:8081/location/v2/";
 	private String requierment;
 	private Context context;
-	UrlCreator(Context context)
+	public UrlCreator(Context context)
 	{
 		this.context = context;
 	}
