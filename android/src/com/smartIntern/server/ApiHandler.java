@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -19,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 public class ApiHandler 
 {
@@ -54,11 +56,19 @@ public class ApiHandler
 		/** Send request */
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);
+<<<<<<< HEAD
 		
 		//not sure if casting will result to something that we want
 		
 		HttpResponse response = httpclient.execute(request);
+=======
+		Log.d("CCCCCCCCCCCCCCC",request.toString());
+		//not sure if casting will result to something that we want
+		HttpResponse response = httpclient.execute(request);
+		//Log.d("DDDDDDDDDDDDDDDDDDDDDD",response.toString());
+>>>>>>> Nervi -> infinit
 		InputStream data = response.getEntity().getContent();
+		//Log.d("MMMMMMMMMMMDAAAAAAAAA", data.toString());
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(data));
 		String responeLine;
@@ -66,6 +76,12 @@ public class ApiHandler
 		{
 			responseBuilder.append(responeLine);
 		}
+<<<<<<< HEAD
+=======
+		
+		//Log.d("BBBBBBBBBBBBBBBBBBBBBBB",responseBuilder.toString());
+
+>>>>>>> Nervi -> infinit
 		return responseBuilder.toString();
 	}
 
@@ -81,19 +97,32 @@ public class ApiHandler
 		JSONObject jObject;
 		String info;
 		ServerResponse result = new ServerResponse();
+<<<<<<< HEAD
 
 		try 
 		{
 			info = getHTTP(req, context);
 		} catch (Exception e1) 
 		{
+=======
+		
+		try {
+			info = getHTTP(req, context);
+		} catch (Exception e1) {
+			Log.d("CUMBAIAAAAAAAA","SHALALALA");
+>>>>>>> Nervi -> infinit
 			result.setStatus(false);
 			result.setError("Server communication error.");
 			return result;
 		}
 
+<<<<<<< HEAD
 		try 
 		{
+=======
+		Log.d("CUMBAIAAAAAAAA","SHALALALA");
+		try {
+>>>>>>> Nervi -> infinit
 			jObject = new JSONObject(info);
 			result.setData(jObject);
 		result.setStatus(true);
@@ -114,6 +143,10 @@ public class ApiHandler
 	 * @return The server's reply @see ServerResponse
 	 */
 	public static ServerResponse getArray(String req, Context context) {
+<<<<<<< HEAD
+=======
+	/*	//JSONArray jObject;
+		//String info;
 		ServerResponse result = new ServerResponse();
 
 		try 
@@ -125,6 +158,8 @@ public class ApiHandler
 			return result;
 		}
 		
+		Log.d("mama matii de result", result.getData().toString());
+		
 		try 
 		{
 			JSONObject m = new JSONObject(result.getData().getString("data"));
@@ -132,6 +167,46 @@ public class ApiHandler
 			result.setArrayData(array);
 		} catch (JSONException e) 
 		{
+			result.setStatus(false);
+			result.setError("Server response format error.");
+			return result;
+		}
+
+		return result;*/
+		JSONArray jArr;
+		JSONObject jObj;
+		String info;
+>>>>>>> Nervi -> infinit
+		ServerResponse result = new ServerResponse();
+
+		try 
+		{
+			result = get(req, context);
+		} catch (Exception e1) {
+			Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAaa","dsa");
+			result.setStatus(false);
+			result.setError("Server communication error.");
+			return result;
+		}
+		
+<<<<<<< HEAD
+		try 
+		{
+			JSONObject m = new JSONObject(result.getData().getString("data"));
+			JSONArray array = m.getJSONArray("items");
+			result.setArrayData(array);
+		} catch (JSONException e) 
+		{
+=======
+		Log.d("info", info);
+
+		try {
+			jObj = new JSONObject(info);
+			jArr = new JSONArray(jObj.getString("items"));
+			result.setArrayData(jArr);
+			result.setStatus(true);
+		} catch (JSONException e) {
+>>>>>>> Nervi -> infinit
 			result.setStatus(false);
 			result.setError("Server response format error.");
 			return result;

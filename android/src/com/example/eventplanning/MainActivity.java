@@ -3,6 +3,10 @@ package com.example.eventplanning;
 
 import java.io.IOException;
 
+import org.apache.http.client.ClientProtocolException;
+
+import com.smartIntern.server.ApiHandler;
+
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -12,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +28,7 @@ public class MainActivity extends Activity
 	private Button btn;
 	private GlobalPositioning GP;
 	private ListBox list;
+	private Context context = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -116,6 +120,15 @@ public class MainActivity extends Activity
 		
 		
 	
+		//Location location = GP.getLocation();
+		//if (location == null) return;
+		//TextView t = (TextView)findViewById(R.id.textView1);		
+		//t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
+//		IntelWebService.getInstance().getNearByPOIs("POI_ALL", location.getLatitude(), location.getLongitude(), "10000",responseListener);
+		/*String token = com.smartIntern.server.IntelGeolocation.GetAccessToken();*/
+		/*Intent i = new Intent(context, Restaurants.class);
+		startActivity(i);
+		Log.d("hello","hello");*/
 	}
 
 }
