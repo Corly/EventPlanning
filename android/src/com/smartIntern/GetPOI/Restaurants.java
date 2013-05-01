@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -28,31 +29,55 @@ public class Restaurants extends Activity
 		setContentView(R.layout.restaurants);
 
 		ListView mListView = (ListView) findViewById(android.R.id.list);
-		mListView.setEmptyView(findViewById(android.R.id.empty));
-
+		mListView.setEmptyView(findViewById(android.R.id.empty)); 
+		final Context cnt = this;
+	//nu final ca nu il mai poti modifica // true nuuuuuuu hai skype
+		
 		// Get Restaurants
 		mItems = new ArrayList<RestaurantItem>();
-		ServerResponse resp = ApiHandler.getArray("https://api.intel.com:8081/location/v2/poi?access_token=c743c833cd60b81dfc2da391bf78ac5e&lat=44.43250&lng=26.10389&radius=2000&category=poi_restaurants&num_results=50",
-				this);
-		//Log.d("resp", resp.toString());
+		
+		// muta tot codu de dupa mythread . start in run :D
+		//whaat?
+		
+		
+		Runnable runnable = new Runnable() 
+		{
+	        public void run() 
+	        {
+	        		ServerResponse resp = ApiHandler.getArray("https://api.intel.com:8081/location/v2/poi?access_token=db04f2ef4568fe36d727d4dea535483c&lat=44.43250&lng=26.10389&radius=2000&category=poi_restaurants&num_results=50",
+							cnt);//pai LLOOOOL
+					ListView mListView = (ListView) findViewById(android.R.id.list);
+					if (resp.getStatus() == false) {
+						Toast.makeText(cnt, resp.getError(), Toast.LENGTH_SHORT).show();
+					} else {
+						try {
+							JSONArray arr = resp.getArrayData();
+							for (int i = 0; i < arr.length(); i++) {
+								RestaurantItem mes = new RestaurantItem();
+								mes.parseContent(arr.getJSONObject(i));
+								mItems.add(mes); // closest on top
+							}
+						} catch (JSONException e) {
+							Toast.makeText(cnt, "Server response format error.",
+									Toast.LENGTH_SHORT).show();
+						}
+					}
+					mListView.post(new Runnable()
+							{
+								public void run()
+								{
+									ListView mListView = (ListView) findViewById(android.R.id.list);
+									mListView.setAdapter(new RestaurantAdapter(cnt, mItems));
+								}
+							});
+					// nu poti accesa dintrun thread elemente din xml asa skype!
+	        }    
+	    };
+	    Thread mythread = new Thread(runnable);
+	    mythread.start();
 		Log.d("tag","1");
-		if (resp.getStatus() == false) {
-			Toast.makeText(this, resp.getError(), Toast.LENGTH_SHORT).show();
-		} else {
-			try {
-				JSONArray arr = resp.getArrayData();
-				for (int i = 0; i < arr.length(); i++) {
-					RestaurantItem mes = new RestaurantItem();
-					mes.parseContent(arr.getJSONObject(i));
-					mItems.add(mes); // closest on top
-				}
-			} catch (JSONException e) {
-				Toast.makeText(this, "Server response format error.",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-
-		mListView.setAdapter(new RestaurantAdapter(this, mItems));
+		
+		
 	}
 
 }

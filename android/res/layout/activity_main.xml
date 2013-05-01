@@ -24,15 +24,4 @@
         android:onClick="Click"
         android:text="Search for Points Of Interest" />
 
-    <com.example.eventplanning.ListBox
-        android:id="@+id/listBox1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="18dp" >
-
-    </com.example.eventplanning.ListBox>
-
 </RelativeLayout>

@@ -29,8 +29,6 @@ public class MainActivity extends Activity
 	
 	private Button btn;
 	private GlobalPositioning GP;
-	private ListBox list;
-	private Context context = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -39,7 +37,6 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 		btn = (Button)findViewById(R.id.button1);
 		btn.setClickable(false);
-		list = (ListBox) findViewById(R.id.listBox1);
 		
 		SearchMyLocation();
 	}
@@ -68,50 +65,15 @@ public class MainActivity extends Activity
 	
 	public void Click(final View v) throws JSONException
 	{
-		Runnable runnable = new Runnable() 
-		{
-	        public void run() 
-	        {
-	        		try
-					{
-						v.setClickable(false);
-						Click2(v);
-					} catch (JSONException e)
-					{
-						e.printStackTrace();
-					}
-	        }    
-	    };
-	    Thread mythread = new Thread(runnable);
-	    mythread.start();
+		Click2( );
 	}
 	
-	public void Click2(final View v) throws JSONException
+	public void Click2()
 	{
+		
 		Location location = GP.getLocation();
 		if (location == null) return;
-		UrlCreator creator = new UrlCreator(context);
-		creator.setRequierment("poi");
-		creator.addArgument("access_token", IntelGeolocation.GetAccessToken());
-		creator.addArgument("lat", 44.43250+"");
-		creator.addArgument("lng", 26.10389+"");
-		creator.addArgument("radius","1000");
-		creator.addArgument("category", "poi_gas_stations");
-		creator.addArgument("num_results", "100");
-		creator.addArgument("alt", "json");
-		try
-		{
-			final ServerResponse resp = creator.execute();
-			list.post(new Runnable(){ public void run() { list.SetContents(ApiHandler.ParseJSON(resp)); } });
-			v.post(new Runnable(){public void run() { v.setClickable(true); }});
-		} catch (ClientProtocolException e)
-		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			
-			e.printStackTrace();
-		}
+		Intent i = new Intent(this, Restaurants.class);
+		startActivity(i);
 	}
-
 }
