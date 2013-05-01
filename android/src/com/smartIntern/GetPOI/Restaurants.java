@@ -17,7 +17,8 @@ import com.example.eventplanning.R;
 import com.smartIntern.server.ApiHandler;
 import com.smartIntern.server.ServerResponse;
 
-public class Restaurants extends Activity{
+public class Restaurants extends Activity
+{
 	private ArrayList<RestaurantItem> mItems;
 
 	@Override

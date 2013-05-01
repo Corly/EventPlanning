@@ -5,10 +5,12 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
+import com.smartIntern.GetPOI.Restaurants;
 import com.smartIntern.server.ApiHandler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,15 +40,8 @@ public class MainActivity extends Activity
 		btn = (Button)findViewById(R.id.button1);
 		btn.setClickable(false);
 		list = (ListBox) findViewById(R.id.listBox1);
-		try
-		{
-			Click2(this);
-		} catch (JSONException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//SearchMyLocation();
+		
+		SearchMyLocation();
 	}
 	
 	void SearchMyLocation()
@@ -71,19 +66,31 @@ public class MainActivity extends Activity
 		return true;
 	}
 	
-	public void Click(View v) throws JSONException
+	public void Click(final View v) throws JSONException
 	{
-		Click2(v.getContext());
+		Runnable runnable = new Runnable() 
+		{
+	        public void run() 
+	        {
+	        		try
+					{
+						v.setClickable(false);
+						Click2(v);
+					} catch (JSONException e)
+					{
+						e.printStackTrace();
+					}
+	        }    
+	    };
+	    Thread mythread = new Thread(runnable);
+	    mythread.start();
 	}
 	
-	public void Click2(Context c) throws JSONException
+	public void Click2(final View v) throws JSONException
 	{
 		Location location = GP.getLocation();
 		if (location == null) return;
-		TextView t = (TextView)findViewById(R.id.textView1);		
-		t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());		
-		
-		UrlCreator creator = new UrlCreator(c);
+		UrlCreator creator = new UrlCreator(context);
 		creator.setRequierment("poi");
 		creator.addArgument("access_token", IntelGeolocation.GetAccessToken());
 		creator.addArgument("lat", 44.43250+"");
@@ -94,41 +101,17 @@ public class MainActivity extends Activity
 		creator.addArgument("alt", "json");
 		try
 		{
-			ServerResponse resp = creator.execute();
-			for (int i = 0;i<resp.getArrayData().length();i++)
-			{
-				JSONObject local  = new JSONObject(resp.getArrayData().getString(i));
-				StringBuilder t1 = new StringBuilder();
-				t1.append("Name : " + local.getString("name")+"\n");
-				t1.append("Latitude : " + local.getString("latitude")+"\n");
-				t1.append("Longitude : " + local.getString("longitude")+"\n");
-				t1.append("City : " + local.getString("city") + "\n");
-				t1.append("Phone : " + local.getString("phone") + "\n");
-				t1.append("Address : " + local.getString("streetAddress"));
-				list.InsertItem(t1.toString());
-			}
+			final ServerResponse resp = creator.execute();
+			list.post(new Runnable(){ public void run() { list.SetContents(ApiHandler.ParseJSON(resp)); } });
+			v.post(new Runnable(){public void run() { v.setClickable(true); }});
 		} catch (ClientProtocolException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		
-		
-		
-	
-		//Location location = GP.getLocation();
-		//if (location == null) return;
-		//TextView t = (TextView)findViewById(R.id.textView1);		
-		//t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
-//		IntelWebService.getInstance().getNearByPOIs("POI_ALL", location.getLatitude(), location.getLongitude(), "10000",responseListener);
-		/*String token = com.smartIntern.server.IntelGeolocation.GetAccessToken();*/
-		/*Intent i = new Intent(context, Restaurants.class);
-		startActivity(i);
-		Log.d("hello","hello");*/
 	}
 
 }

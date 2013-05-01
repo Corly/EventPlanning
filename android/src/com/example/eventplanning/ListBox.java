@@ -40,5 +40,15 @@ public class ListBox extends ListView
 		myarrayAdapter.notifyDataSetChanged();
 	}
 	
+	public void SetContents(ArrayList<String> elements)
+	{
+		this.elements.clear();
+		for (int i = 0;i<elements.size();i++)
+		{
+			this.elements.add(elements.get(i));
+		}
+		myarrayAdapter.notifyDataSetChanged();
+	}
+	
 	
 }

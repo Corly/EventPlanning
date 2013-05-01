@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -24,13 +24,6 @@ import android.util.Log;
 
 public class ApiHandler 
 {
-	private static final String BASE_URL = "https://api.intel.com:8081/";	
-	private static final String URL_PARAM_ACCESS_TOKEN = "{access_token}";
-	private static final String URL_PARAM_POI_CATEGORY = "{category}";
-	private static final String URL_PARAM_LATITUDE = "{latitude}";
-	private static final String URL_PARAM_LONGITUDE = "{longitude}";
-	private static final String URL_PARAM_RADIUS = "{radius}";
-
 	/**
 	 * Gets a general HTTP string.
 	 * 
@@ -48,24 +41,12 @@ public class ApiHandler
 
 		StringBuilder responseBuilder = new StringBuilder();
 
-		/*SharedPreferences mAppInfo = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		
-		final String token = mAppInfo.getString("token", null);*/
-
 		/** Send request */
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);
-
-		
-		//not sure if casting will result to something that we want
-		
-
-		//not sure if casting will result to something that we want
 		HttpResponse response = httpclient.execute(request);
 
 		InputStream data = response.getEntity().getContent();
-		//Log.d("MMMMMMMMMMMDAAAAAAAAA", data.toString());
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(data));
 		String responeLine;
@@ -73,11 +54,8 @@ public class ApiHandler
 		{
 			responseBuilder.append(responeLine);
 		}
-
 		return responseBuilder.toString();
 	}
-
-
 	/**
 	 * Generic HTTP GET data request
 	 * 
@@ -89,7 +67,6 @@ public class ApiHandler
 		JSONObject jObject;
 		String info;
 		ServerResponse result = new ServerResponse();
-
 		try 
 		{
 			info = getHTTP(req, context);
@@ -99,7 +76,6 @@ public class ApiHandler
 			result.setError("Server communication error.");
 			return result;
 		}
-
 		try 
 		{
 			jObject = new JSONObject(info);
@@ -121,24 +97,19 @@ public class ApiHandler
 	 * @param req The request
 	 * @return The server's reply @see ServerResponse
 	 */
-	public static ServerResponse getArray(String req, Context context) {
-
-		JSONArray jArr;
-		JSONObject jObj;
-		String info;
-
+	public static ServerResponse getArray(String req, Context context) 
+	{
 		ServerResponse result = new ServerResponse();
 
 		try 
 		{
 			result = get(req, context);
-		} catch (Exception e1) {
-			Log.d("AAAAAAAAAAAAAAAAAAAAAAAAAAaa","dsa");
+		} catch (Exception e1) 
+		{
 			result.setStatus(false);
 			result.setError("Server communication error.");
 			return result;
-		}
-		
+		}		
 
 		try 
 		{
@@ -238,6 +209,31 @@ public class ApiHandler
 			}
 		}
 		return sb.toString();
+	}
+	
+	public static ArrayList<String> ParseJSON(ServerResponse resp)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		try
+		{
+			for (int i = 0;i<resp.getArrayData().length();i++)
+			{
+				JSONObject local  = new JSONObject(resp.getArrayData().getString(i));
+				StringBuilder t1 = new StringBuilder();
+				t1.append("Name : " + local.getString("name")+"\n");
+				t1.append("Latitude : " + local.getString("latitude")+"\n");
+				t1.append("Longitude : " + local.getString("longitude")+"\n");
+				t1.append("City : " + local.getString("city") + "\n");
+				t1.append("Phone : " + local.getString("phone") + "\n");
+				t1.append("Address : " + local.getString("streetAddress"));
+				list.add(t1.toString());				
+			}
+		}
+		catch (Exception er)
+		{
+			
+		}
+		return list;
 	}
 
 }
