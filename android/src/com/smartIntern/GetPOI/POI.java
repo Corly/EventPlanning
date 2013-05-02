@@ -16,10 +16,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
-<<<<<<< HEAD
+
 import android.view.MenuItem;
-=======
->>>>>>> Will conflict!
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -81,7 +79,6 @@ public class POI extends Activity
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		//this.requestWindowFeature(Window.FEATURE_ACTION_BAR);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.restaurants);
 
@@ -189,13 +186,6 @@ public class POI extends Activity
 		   if ( !results_show) {
 		    	finish();
 		    }
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-	{
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 	
 	private String GetCategory(String category){

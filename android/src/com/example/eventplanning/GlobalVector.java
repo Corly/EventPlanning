@@ -11,6 +11,7 @@ public final class GlobalVector {
 		return instance;
 	}
 	
-	private GlobalVector(){
+	private GlobalVector()
+	{
 	}
 }

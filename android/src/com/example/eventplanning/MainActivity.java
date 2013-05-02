@@ -43,7 +43,7 @@ public class MainActivity extends Activity
 					Spinner spinner = (Spinner)findViewById(R.id.spinner1);
 					String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
 					String radius = etext.getText().toString();
-					Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+					Intent i = new Intent(getApplicationContext(), POI.class);
 					i.putExtra("category", category );
 					i.putExtra("radius", radius);
 					startActivity(i);
