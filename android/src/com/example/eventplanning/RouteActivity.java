@@ -8,8 +8,6 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.net.Uri.Builder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;

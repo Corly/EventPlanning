@@ -25,18 +25,6 @@ import android.util.Log;
 
 public class ApiHandler 
 {
-	/**
-	 * Gets a general HTTP string.
-	 * 
-	 * @param req
-	 *            The url to get it from.
-	 * @return A String containing the data.
-	 * @throws OAuthCommunicationException
-	 * @throws OAuthExpectationFailedException
-	 * @throws OAuthMessageSignerException
-	 * @throws IOException
-	 * @throws ClientProtocolException
-	 */
 	public static String getHTTP(Uri url, Context context) throws ClientProtocolException, IOException 
 	{
 
@@ -61,12 +49,6 @@ public class ApiHandler
 		}
 		return responseBuilder.toString();
 	}
-	/**
-	 * Generic HTTP GET data request
-	 * 
-	 * @param request
-	 * @return the server's reply @see ServerResponse
-	 */
 	public static ServerResponse get(Uri req, Context context) 
 	{
 		JSONObject jObject;
@@ -95,13 +77,6 @@ public class ApiHandler
 
 		return result;
 	}
-	
-	/**
-	 * Generic HTTP GET data request
-	 * 
-	 * @param req The request
-	 * @return The server's reply @see ServerResponse
-	 */
 	public static ServerResponse getArray(Uri req, Context context) 
 	{
 		ServerResponse result = new ServerResponse();
@@ -131,18 +106,6 @@ public class ApiHandler
 
 		return result;
 	}
-	
-	/**
-	 * Sends a POST with the specified data.
-	 * 
-	 * @param host
-	 *            The host to send the POST to
-	 * @param data
-	 *            The data to send.
-	 * @return The server's response to the POST.
-	 * @throws IOException
-	 * @throws ClientProtocolException
-	 */
 	public static HttpResponse postHttp(String host, List<NameValuePair> data, Context context) throws ClientProtocolException, IOException 
 	{
 		String url = host;
