@@ -49,4 +49,11 @@ public class POIItem {
 	public String getStreetAddress() {
 		return streetAddress;
 	}
+	
+	public String convertToString()
+	{
+		return "Name : " + name + "\n" + "City : " + city + "\n" + "Street Address : " + streetAddress + "\n" + "Latitude : " + latitude + "\n" + "Longitude : " + longitude + "\n" + "Phone : " + 
+	phone + "\n" + "Email : " + email;
+		
+	}
 }

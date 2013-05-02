@@ -6,15 +6,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.smartIntern.server.ServerResponse;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.smartIntern.server.ServerResponse;
 
 public class RouteActivity extends Activity
 {

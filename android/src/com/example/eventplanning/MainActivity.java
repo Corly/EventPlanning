@@ -64,10 +64,6 @@ public class MainActivity extends Activity
 			location = GP.getLocation();
 			if (location != null) break;
 		}
-		//TextView t = (TextView)findViewById(R.id.textView1);		
-		//t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
-		//btn.setClickable(true);
-		
 	}
 
 	@Override
@@ -76,18 +72,4 @@ public class MainActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	/*public void Click(final View v) throws JSONException
-	{
-		Click2( );
-	}
-	
-	public void Click2()
-	{
-		
-		Location location = GP.getLocation();
-		if (location == null) return;
-		Intent i = new Intent(this, RouteActivity.class);
-		startActivity(i);
-	}*/
 }
