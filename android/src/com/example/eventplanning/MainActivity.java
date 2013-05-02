@@ -47,7 +47,6 @@ public class MainActivity extends Activity
 					i.putExtra("category", category );
 					i.putExtra("radius", radius);
 					startActivity(i);
-					//ghdghdsjgjksdhj
 				}
 				
 			}
