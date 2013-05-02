@@ -8,13 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-<<<<<<< HEAD
-    <TextView
-        android:id="@+id/RouteTextView1"
-=======
     <!-- <TextView
         android:id="@+id/textView1"
->>>>>>> Begging of graphical interface
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Searching for position.." /> -->

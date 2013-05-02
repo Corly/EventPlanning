@@ -81,17 +81,4 @@ public abstract class IntelGeolocation
 		    }
 		});
 	}
-
-	public static void MakeToast(final String message , final Context cnt)
-	 {
-	  Activity activity = (Activity)cnt;
-	  activity.runOnUiThread(new Runnable() 
-	  {
-	      @Override
-	      public void run() 
-	      {
-	       Toast.makeText(cnt , message , Toast.LENGTH_LONG).show();
-	      }
-	  });
-	 }
 }
