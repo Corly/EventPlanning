@@ -29,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.smartIntern.GetPOI.POI" >
+        <activity android:name="com.smartIntern.GetPOI.POI"
+            	  android:configChanges="orientation|screenSize" >
         </activity>
         <activity android:name="com.example.eventplanning.CurrentDestinations">
         </activity>
