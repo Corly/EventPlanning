@@ -19,6 +19,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventplanning.IntelGeolocation;
@@ -76,6 +77,9 @@ public class POI extends Activity
 			category = extras.getString("category");
 			radius = extras.getString("radius");
 		}
+		
+		TextView category_tag = (TextView)findViewById(R.id.poi_activitity_category_tag);
+		category_tag.setText(category + ":");
 		
 		Runnable runnable = new Runnable() 
 		{

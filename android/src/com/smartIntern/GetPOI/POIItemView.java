@@ -19,8 +19,10 @@ public class POIItemView extends LinearLayout {
 		LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layoutInflater.inflate(R.layout.simple_restaurant_list, this, true);
 
-		TextView subject = (TextView) findViewById(R.id.restaurant_name);
-		subject.setText(item.getName());
+		TextView restaurant_name = (TextView) findViewById(R.id.restaurant_name);
+		restaurant_name.setText(item.getName());
 	
+		TextView restaurant_address = (TextView) findViewById(R.id.restaurant_address);
+		restaurant_address.setText(item.getStreetAddress());
 	}
 }
