@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import org.apache.http.client.ClientProtocolException;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 
 import com.smartIntern.server.ApiHandler;
 import com.smartIntern.server.ServerResponse;
@@ -31,14 +33,37 @@ public class UrlCreator
 		parameters.add(parameter + "=" + value);
 	}
 	
-	public ServerResponse execute() throws ClientProtocolException, IOException
+	public String executeWithGetHTTP() throws ClientProtocolException, IOException
 	{
 		String finalURL = baseURL + requierment + "?";
 		int size = parameters.size();
 		for (int i  = 0;i<size -1;i++)
 			finalURL += parameters.get(i) + "&";
 		finalURL += parameters.get(size-1);		
-		return ApiHandler.getArray(finalURL, context);
+		Log.d("TEST",finalURL);
+		return ApiHandler.getHTTP(Uri.parse(finalURL), context);
+	}
+	
+	public ServerResponse executeWithGetArray() throws ClientProtocolException, IOException
+	{
+		String finalURL = baseURL + requierment + "?";
+		int size = parameters.size();
+		for (int i  = 0;i<size -1;i++)
+			finalURL += parameters.get(i) + "&";
+		finalURL += parameters.get(size-1);		
+		Log.d("TEST",finalURL);
+		return ApiHandler.getArray(Uri.parse(finalURL), context);
+	}
+	
+	public ServerResponse executeWithGet() throws ClientProtocolException, IOException
+	{
+		String finalURL = baseURL + requierment + "?";
+		int size = parameters.size();
+		for (int i  = 0;i<size -1;i++)
+			finalURL += parameters.get(i) + "&";
+		finalURL += parameters.get(size-1);		
+		Log.d("TEST",finalURL);
+		return ApiHandler.get(Uri.parse(finalURL), context);
 	}
 
 }

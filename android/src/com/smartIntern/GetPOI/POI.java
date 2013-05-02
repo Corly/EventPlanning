@@ -16,7 +16,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+<<<<<<< HEAD
 import android.view.MenuItem;
+=======
+>>>>>>> Will conflict!
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -139,7 +142,7 @@ public class POI extends Activity
 		ServerResponse resp = null;
 		try
 		{
-			resp = crt.execute();
+			resp = crt.executeWithGetArray();
 		} catch (ClientProtocolException e1)
 		{
 			MakeToast("Server response error");
@@ -186,6 +189,13 @@ public class POI extends Activity
 		   if ( !results_show) {
 		    	finish();
 		    }
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
 	
 	private String GetCategory(String category){

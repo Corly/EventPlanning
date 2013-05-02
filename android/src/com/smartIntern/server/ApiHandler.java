@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 public class ApiHandler 
@@ -36,16 +37,20 @@ public class ApiHandler
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 */
-	public static String getHTTP(String url, Context context) throws ClientProtocolException, IOException 
+	public static String getHTTP(Uri url, Context context) throws ClientProtocolException, IOException 
 	{
 
 		StringBuilder responseBuilder = new StringBuilder();
 
 		/** Send request */
 		DefaultHttpClient httpclient = new DefaultHttpClient();
-		HttpGet request = new HttpGet(url);
+		Log.d("TEST","0");
+		HttpGet request = new HttpGet(url.toString());
+		Log.d("TEST","1");
 		HttpResponse response = httpclient.execute(request);
-
+		Log.d("TEST","2");
+		
+		
 		InputStream data = response.getEntity().getContent();
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(data));
@@ -62,7 +67,7 @@ public class ApiHandler
 	 * @param request
 	 * @return the server's reply @see ServerResponse
 	 */
-	public static ServerResponse get(String req, Context context) 
+	public static ServerResponse get(Uri req, Context context) 
 	{
 		JSONObject jObject;
 		String info;
@@ -97,7 +102,7 @@ public class ApiHandler
 	 * @param req The request
 	 * @return The server's reply @see ServerResponse
 	 */
-	public static ServerResponse getArray(String req, Context context) 
+	public static ServerResponse getArray(Uri req, Context context) 
 	{
 		ServerResponse result = new ServerResponse();
 

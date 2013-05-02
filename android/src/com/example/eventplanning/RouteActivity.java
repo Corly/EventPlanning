@@ -8,7 +8,10 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
+import android.net.Uri.Builder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -22,16 +25,16 @@ public class RouteActivity extends Activity
 	TextView distanceTEXT;
 	TextView timeTEXT;
 	
-	public void GetRoute()
+	public void GetRoute(String token)
 	{
 		if (!IntelGeolocation.isNetworkAvailable(cnt))
 		{
 			IntelGeolocation.MakeToast("No internet connection!", cnt);
 			return;
 		}
-		UrlCreator creator = new UrlCreator(this);
+		UrlCreator creator = new UrlCreator(cnt);
 		creator.setRequierment("route");
-		creator.addArgument("access_token", IntelGeolocation.GetAccessToken());
+		creator.addArgument("access_token", token);
 		creator.addArgument("origin_lat", "44.43250");
 		creator.addArgument("origin_lng", "26.10389");
 		creator.addArgument("destination_lat","44.435814");
@@ -40,7 +43,7 @@ public class RouteActivity extends Activity
 		try
 		{
 			final ServerResponse resp;
-			resp = creator.execute();
+			resp = creator.executeWithGetArray();
 			if (resp == null) return;
 			String str = resp.getData().toString();
 			int poz1 = str.indexOf("totalDistanceInMeters") + "totalDistanceInMeters".length() + 2;
@@ -71,7 +74,14 @@ public class RouteActivity extends Activity
 			for (int i =0;i<obj.length();i++)
 			{
 				final String text = obj.getString(i);
-				list.post(new Runnable(){public void run(){list.InsertItem(text);}});
+				int start = text.indexOf("description") +  "'description':{'text':".length();	
+				String locationString = "";
+				for (int k = start;text.charAt(k) != '"';k++)
+				{
+					locationString+= text.charAt(k);
+				}
+				final String route = locationString;
+				list.post(new Runnable(){public void run(){list.InsertItem(route);}});
 			}
 			
 		} catch (ClientProtocolException e)
@@ -82,6 +92,37 @@ public class RouteActivity extends Activity
 			e.printStackTrace();
 		} catch (JSONException e)
 		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void GetStaticMapURL(String token)
+	{
+		if (!IntelGeolocation.isNetworkAvailable(cnt))
+		{
+			IntelGeolocation.MakeToast("No internet connection!", cnt);
+			return;
+		}
+		UrlCreator creator = new UrlCreator(cnt);
+		creator.setRequierment("staticurl");
+		creator.addArgument("access_token", token);
+		creator.addArgument("size", "480x480");
+		creator.addArgument("center", "44.43250,26.10389");
+		creator.addArgument("zoom", "14");
+		creator.addArgument("route","from:44.43250,26.10389%7Cto:44.435215,26.106804%7Calgorithm:FASTEST");
+		creator.addArgument("dpi","300");
+		try
+		{
+			String data = creator.executeWithGetHTTP();
+			int start = "{'data':{'url':".length() +1 ;
+			data = data.substring(start, data.length()-3);
+			Log.d("TEST",data);
+			
+		} catch (ClientProtocolException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{			
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +141,9 @@ public class RouteActivity extends Activity
 		{
 	        public void run() 
 	        {
-	        	GetRoute();
+	        	String token = IntelGeolocation.GetAccessToken();
+	        	GetRoute(token);
+	        	GetStaticMapURL(token);	        	
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
