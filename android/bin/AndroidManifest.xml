@@ -31,6 +31,8 @@
         </activity>
         <activity android:name="com.smartIntern.GetPOI.POI" >
         </activity>
+        <activity android:name="com.example.eventplanning.CurrentDestinations">
+        </activity>
         <activity
             android:name="com.example.eventplanning.RouteActivity"
             android:label="@string/title_activity_route" >

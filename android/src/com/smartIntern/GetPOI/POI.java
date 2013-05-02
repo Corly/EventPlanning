@@ -11,9 +11,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -22,7 +25,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eventplanning.CurrentDestinations;
+import com.example.eventplanning.GlobalVector;
 import com.example.eventplanning.IntelGeolocation;
+import com.example.eventplanning.LatLng;
 import com.example.eventplanning.R;
 import com.example.eventplanning.UrlCreator;
 import com.smartIntern.server.ServerResponse;
@@ -39,13 +45,21 @@ public class POI extends Activity
 	{
 		public void onItemClick(AdapterView<?> adapter, View view, int position, long id)
 		{
+			final int pos = position;
 			AlertDialog.Builder dialog = new AlertDialog.Builder(cnt);
 			dialog.setMessage(mItems.get(position).convertToString());
 			dialog.setPositiveButton("Add to Route", new OnClickListener()
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					
+					//SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(cnt);
+					//SharedPreferences.Editor editor = mPreferences.edit();
+					//editor
+					LatLng ll = new LatLng();
+					ll.name = mItems.get(pos).getName();
+					ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
+					ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
+					GlobalVector.getInstance().routeList.add(ll);
 				}				
 			});
 			dialog.setNegativeButton("Show Route", new OnClickListener()
@@ -63,6 +77,7 @@ public class POI extends Activity
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		//this.requestWindowFeature(Window.FEATURE_ACTION_BAR);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.restaurants);
 
@@ -203,5 +218,27 @@ public class POI extends Activity
 		return "";
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case R.id.show_current:
+	        	if (GlobalVector.getInstance().routeList.isEmpty())
+	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+	        	else {
+	        		Intent i = new Intent(getApplicationContext(), CurrentDestinations.class);
+	        		startActivity(i);
+	        	}
+	        		
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 
 }
