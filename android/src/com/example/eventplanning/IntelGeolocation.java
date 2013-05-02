@@ -10,7 +10,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 public abstract class IntelGeolocation
 {
@@ -27,7 +33,7 @@ public abstract class IntelGeolocation
 		{
 			HttpClient httpclient = new DefaultHttpClient();
 			
-			String parameters = "client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials&scope=location:basic&language1=fr&language2=en";
+			String parameters = "client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials&scope=location:basic&language1=ro&language2=en";
 		    String linkRequest = "https://api.intel.com:8081/oauth20/token";
 		    
 			
@@ -54,5 +60,25 @@ public abstract class IntelGeolocation
 	        return "";
 	    }
 		return "";   	    
+	}
+	
+	public static boolean  isNetworkAvailable(Context context)
+	{
+		ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+	
+	public static void MakeToast(final String message , final Context cnt)
+	{
+		Activity activity = (Activity)cnt;
+		activity.runOnUiThread(new Runnable() 
+		{
+		    @Override
+		    public void run() 
+		    {
+		    	Toast.makeText(cnt , message , Toast.LENGTH_LONG).show();
+		    }
+		});
 	}
 }

@@ -41,7 +41,7 @@ public class MainActivity extends Activity
 			location = GP.getLocation();
 			if (location != null) break;
 		}
-		TextView t = (TextView)findViewById(R.id.textView1);		
+		TextView t = (TextView)findViewById(R.id.RouteTextView1);		
 		t.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
 		btn.setClickable(true);
 		
@@ -64,7 +64,7 @@ public class MainActivity extends Activity
 		
 		Location location = GP.getLocation();
 		if (location == null) return;
-		Intent i = new Intent(this, POI.class);
+		Intent i = new Intent(this, RouteActivity.class);
 		startActivity(i);
 	}
 }

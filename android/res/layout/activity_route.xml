@@ -6,22 +6,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".RouteActivity" >
+
+    <com.example.eventplanning.ListBox
+        android:id="@+id/listBox1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/RouteTextView2" >
+
+    </com.example.eventplanning.ListBox>
 
     <TextView
         android:id="@+id/RouteTextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Searching for position.." />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Loading..."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/RouteTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/RouteTextView1"
         android:layout_below="@+id/RouteTextView1"
-        android:layout_marginTop="16dp"
-        android:onClick="Click"
-        android:text="Search for Points Of Interest" />
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

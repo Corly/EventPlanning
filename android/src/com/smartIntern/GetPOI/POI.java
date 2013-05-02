@@ -10,6 +10,7 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -46,6 +47,19 @@ public class POI extends Activity
 	    mythread.start();		
 	}
 	
+	public void MakeToast(final String message)
+	{
+		Handler toastHandler = new Handler();
+		Runnable toastRunnable = new Runnable() 
+		{
+			public void run() 
+			{
+				Toast.makeText(cnt , message , Toast.LENGTH_SHORT).show();
+			}
+		};
+		toastHandler.post(toastRunnable);
+	}
+	
 	private void GetPOIS()
 	{
 		UrlCreator crt = new UrlCreator(cnt);
@@ -62,17 +76,17 @@ public class POI extends Activity
 			resp = crt.execute();
 		} catch (ClientProtocolException e1)
 		{
-			Toast.makeText(cnt , "Server response error" , Toast.LENGTH_SHORT).show();
+			MakeToast("Server response error");
 			return;
 		} catch (IOException e1)
 		{
-			Toast.makeText(cnt , "I/O error" , Toast.LENGTH_SHORT).show();
+			MakeToast("I/O error");
 			return;
 		}
 		
 		if (resp == null)
 		{
-			Toast.makeText(cnt , "Server response error" , Toast.LENGTH_SHORT).show();
+			MakeToast("Server response error");
 			return;
 		}
 		
@@ -88,8 +102,7 @@ public class POI extends Activity
 					mItems.add(mes); // closest on top
 				}
 			} catch (JSONException e) {
-				Toast.makeText(cnt, "Server response format error.",
-						Toast.LENGTH_SHORT).show();
+				MakeToast("Server response format error");
 				return;
 			}
 		}
