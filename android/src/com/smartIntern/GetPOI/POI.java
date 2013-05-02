@@ -7,6 +7,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class POI extends Activity
 {
 	private ArrayList<POIItem> mItems;
 	final Context cnt = this;
+	private String category;
+	private String radius;
+	private Boolean results_show = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
@@ -36,6 +40,12 @@ public class POI extends Activity
 		mListView.setEmptyView(findViewById(android.R.id.empty)); 
 		mItems = new ArrayList<POIItem>();
 		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null){
+			category = extras.getString("category");
+			radius = extras.getString("radius");
+		}
+		
 		Runnable runnable = new Runnable() 
 		{
 	        public void run() 
@@ -44,7 +54,7 @@ public class POI extends Activity
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
-	    mythread.start();		
+	    mythread.start();
 	}
 	
 	public void MakeToast(final String message)
@@ -67,8 +77,8 @@ public class POI extends Activity
 		crt.addArgument("access_token", IntelGeolocation.GetAccessToken());
 		crt.addArgument("lat", "44.43250");
 		crt.addArgument("lng", "26.10389");
-		crt.addArgument("category", "POI_RESTAURANTS");// asta o sa il dam ca parametru la intent
-		crt.addArgument("radius", "2000");
+		crt.addArgument("category", GetCategory(category));// asta o sa il dam ca parametru la intent
+		crt.addArgument("radius", radius);
 		crt.addArgument("num_results", "50");
 		ServerResponse resp = null;
 		try
@@ -96,6 +106,10 @@ public class POI extends Activity
 		} else {
 			try {
 				JSONArray arr = resp.getArrayData();
+				if ( arr.length() == 0){
+					IntelGeolocation.MakeToast("No results were found!", cnt);
+					results_show = false;
+				}
 				for (int i = 0; i < arr.length(); i++) {
 					POIItem mes = new POIItem();
 					mes.parseContent(arr.getJSONObject(i));
@@ -114,8 +128,43 @@ public class POI extends Activity
 				mListView.setAdapter(new POIAdapter(cnt, mItems));
 			}
 		});
+		
+		   if ( !results_show) {
+		    	finish();
+		    }
 	}
 	
+	private String GetCategory(String category){
+		
+		if ( category.startsWith("Restaurant"))
+			return "POI_RESTAURANTS";
+		else
+		if ( category.startsWith("Hotel"))
+			return "POI_HOTELS";
+		else
+		if ( category.startsWith("Gas"))
+			return "POI_GAS_STATIONS";
+		else
+		if ( category.startsWith("Shopping"))
+			return "POI_SHOPPING";
+		else
+		if ( category.startsWith("Transport"))
+			return "POI_TRANSPORTATION";
+		else
+		if ( category.startsWith("Parking"))
+			return "POI_PARKING";
+		else
+		if ( category.startsWith("Entertain"))
+			return "POI_ENTERTAINMENT";
+		else
+		if ( category.startsWith("Emergency"))
+			return "POI_EMERGENCY";
+		else
+		if ( category.startsWith("Tourism"))
+			return "POI_TOURISM";
+		
+		return "";
+	}
 	
 
 }
