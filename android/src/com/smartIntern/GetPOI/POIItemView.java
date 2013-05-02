@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import com.example.eventplanning.R;
 
-public class RestaurantItemView extends LinearLayout {
-	RestaurantItem mItem;
+public class POIItemView extends LinearLayout {
+	POIItem mItem;
 	Context mContext;
 
-	public RestaurantItemView(Context context, RestaurantItem item) {
+	public POIItemView(Context context, POIItem item) {
 		super(context);
 		mContext = context;
 		mItem = item;

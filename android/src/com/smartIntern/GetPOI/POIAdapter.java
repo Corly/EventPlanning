@@ -10,15 +10,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public class RestaurantAdapter extends BaseAdapter{
+public class POIAdapter extends BaseAdapter{
 	
-	ArrayList<RestaurantItem> mItems;
+	ArrayList<POIItem> mItems;
 	OnClickListener mOnItemClick;
 	Context mContext;
 	//final Intent readMessage;
 
-	public RestaurantAdapter(Context context, ArrayList<RestaurantItem> items) {
-		mItems = new ArrayList<RestaurantItem>();
+	public POIAdapter(Context context, ArrayList<POIItem> items) {
+		mItems = new ArrayList<POIItem>();
 		mContext = context;
 		mItems = items;
 		//readMessage = new Intent(mContext, ReadMessageReceived.class);
@@ -37,7 +37,7 @@ public class RestaurantAdapter extends BaseAdapter{
 	}
 
 	public View getView(int index, View convertView, ViewGroup parent) {
-		RestaurantItemView item;
+		POIItemView item;
 
 		/*final String from = mItems.get(index).getAuthor();
 		final String subject = mItems.get(index).getSubject();
@@ -46,7 +46,7 @@ public class RestaurantAdapter extends BaseAdapter{
 		final String id = mItems.get(index).getId();
 		final String read = mItems.get(index).getRead();
 */
-		item = new RestaurantItemView(mContext, mItems.get(index));
+		item = new POIItemView(mContext, mItems.get(index));
 /*		item.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {

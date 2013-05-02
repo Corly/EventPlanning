@@ -19,9 +19,9 @@ import com.example.eventplanning.R;
 import com.example.eventplanning.UrlCreator;
 import com.smartIntern.server.ServerResponse;
 
-public class Restaurants extends Activity
+public class POI extends Activity
 {
-	private ArrayList<RestaurantItem> mItems;
+	private ArrayList<POIItem> mItems;
 	final Context cnt = this;
 
 	@Override
@@ -33,7 +33,7 @@ public class Restaurants extends Activity
 
 		ListView mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setEmptyView(findViewById(android.R.id.empty)); 
-		mItems = new ArrayList<RestaurantItem>();
+		mItems = new ArrayList<POIItem>();
 		
 		Runnable runnable = new Runnable() 
 		{
@@ -83,7 +83,7 @@ public class Restaurants extends Activity
 			try {
 				JSONArray arr = resp.getArrayData();
 				for (int i = 0; i < arr.length(); i++) {
-					RestaurantItem mes = new RestaurantItem();
+					POIItem mes = new POIItem();
 					mes.parseContent(arr.getJSONObject(i));
 					mItems.add(mes); // closest on top
 				}
@@ -98,7 +98,7 @@ public class Restaurants extends Activity
 			public void run()
 			{
 				ListView mListView = (ListView) findViewById(android.R.id.list);
-				mListView.setAdapter(new RestaurantAdapter(cnt, mItems));
+				mListView.setAdapter(new POIAdapter(cnt, mItems));
 			}
 		});
 	}

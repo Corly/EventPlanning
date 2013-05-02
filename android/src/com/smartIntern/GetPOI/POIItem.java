@@ -3,7 +3,7 @@ package com.smartIntern.GetPOI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RestaurantItem {
+public class POIItem {
 	private String latitude;
 	private String longitude;
 	private String name;
