@@ -18,10 +18,10 @@ import com.smartIntern.server.ServerResponse;
 public class RouteActivity extends Activity
 {
 
-	Context cnt;
-	ListBox list;	
-	TextView distanceTEXT;
-	TextView timeTEXT;
+	private Context cnt;
+	private ListBox list;	
+	private TextView distanceTEXT;
+	private TextView timeTEXT;
 	
 	public void GetRoute(String token)
 	{
@@ -33,10 +33,28 @@ public class RouteActivity extends Activity
 		UrlCreator creator = new UrlCreator(cnt);
 		creator.setRequierment("route");
 		creator.addArgument("access_token", token);
-		creator.addArgument("origin_lat", "44.43250");
-		creator.addArgument("origin_lng", "26.10389");
-		creator.addArgument("destination_lat","44.435814");
-		creator.addArgument("destination_lng", "26.09449");
+		int numberofpoints = GlobalVector.getInstance().routeList.size();
+		LatLng origin = new LatLng(44.43250,26.10389);
+		LatLng dest = GlobalVector.getInstance().routeList.get(numberofpoints-1);
+		
+		creator.addArgument("origin_lat", origin.lat+"");
+		creator.addArgument("origin_lng", origin.lng+"");
+		creator.addArgument("destination_lat",dest.lat+"");
+		creator.addArgument("destination_lng", dest.lng+"");
+		
+		String via_points = "";
+		LatLng point;
+		for (int i = 0;i<numberofpoints - 2;i++)
+		{
+			point = GlobalVector.getInstance().routeList.get(i);
+			via_points += (point.lat + "," + point.lng + ",");
+		}
+		if (numberofpoints >= 2)
+		{
+			point = GlobalVector.getInstance().routeList.get(numberofpoints-2);
+			via_points +=  (point.lat + "," + point.lng);	
+		}
+		if (via_points != "" ) creator.addArgument("via_points_lat_lng",via_points);
 		creator.addArgument("route_algorithm", "FASTEST");
 		try
 		{
@@ -141,7 +159,7 @@ public class RouteActivity extends Activity
 	        {
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
-	        	GetStaticMapURL(token);	        	
+	        	//GetStaticMapURL(token);	        	
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
@@ -151,7 +169,7 @@ public class RouteActivity extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		getMenuInflater().inflate(R.menu.route, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

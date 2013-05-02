@@ -31,6 +31,7 @@ import com.example.eventplanning.GlobalVector;
 import com.example.eventplanning.IntelGeolocation;
 import com.example.eventplanning.LatLng;
 import com.example.eventplanning.R;
+import com.example.eventplanning.RouteActivity;
 import com.example.eventplanning.UrlCreator;
 import com.smartIntern.server.ServerResponse;
 
@@ -53,9 +54,7 @@ public class POI extends Activity
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					//SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(cnt);
-					//SharedPreferences.Editor editor = mPreferences.edit();
-					//editor
+					
 					LatLng ll = new LatLng();
 					ll.name = mItems.get(pos).getName();
 					ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
@@ -68,7 +67,13 @@ public class POI extends Activity
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					
+					if (GlobalVector.getInstance().routeList.isEmpty())
+		        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+		        	else 
+		        	{
+		        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+		        		startActivity(i);
+		        	}
 				}				
 			});
 			dialog.show();
@@ -222,24 +227,41 @@ public class POI extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
-		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		switch (item.getItemId()) 
+	    {
 	        case R.id.show_current:
+	        {
 	        	if (GlobalVector.getInstance().routeList.isEmpty())
 	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
 	        	else {
 	        		Intent i = new Intent(getApplicationContext(), CurrentDestinations.class);
 	        		startActivity(i);
 	        	}
+	        	break;
+	        }
+	        
+	        case R.id.make_route:
+	        {
+	        	if (GlobalVector.getInstance().routeList.isEmpty())
+	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+	        	else 
+	        	{
+	        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+	        		startActivity(i);
+	        	}
+	        	break;
+	        }
 	        		
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+		return false;
 	}
 
 }

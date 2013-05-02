@@ -32,9 +32,8 @@ public abstract class IntelGeolocation
 		{
 			HttpClient httpclient = new DefaultHttpClient();
 			
-			String parameters = "client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials&scope=location:basic&language1=ro&language2=en";
-		    String linkRequest = "https://api.intel.com:8081/oauth20/token";
-		    
+			String parameters = "client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials&scope=location:basic&language1=en&language2=fr";
+		    String linkRequest = "https://api.intel.com:8081/oauth20/token";		    
 			
 		    parameters = parameters.replace("{client_id}", "4247c4dce5a5b0c58e29b2a830f8c768");
 		    parameters = parameters.replace("{client_secret}", "de779a6a10dd3443");

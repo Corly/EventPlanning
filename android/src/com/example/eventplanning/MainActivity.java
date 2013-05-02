@@ -75,17 +75,34 @@ public class MainActivity extends Activity
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
+	    switch (item.getItemId()) 
+	    {
 	        case R.id.show_current:
+	        {
 	        	if (GlobalVector.getInstance().routeList.isEmpty())
 	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
 	        	else {
 	        		Intent i = new Intent(getApplicationContext(), CurrentDestinations.class);
 	        		startActivity(i);
 	        	}
+	        	break;
+	        }
+	        
+	        case R.id.make_route:
+	        {
+	        	if (GlobalVector.getInstance().routeList.isEmpty())
+	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+	        	else 
+	        	{
+	        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+	        		startActivity(i);
+	        	}
+	        	break;
+	        }
 	        		
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+		return false;
 	}
 }
