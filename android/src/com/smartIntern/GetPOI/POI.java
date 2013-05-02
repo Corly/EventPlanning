@@ -60,6 +60,7 @@ public class POI extends Activity
 					ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
 					ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
 					GlobalVector.getInstance().routeList.add(ll);
+					MakeToast("Done!");
 				}				
 			});
 			dialog.setNegativeButton("Show Route", new OnClickListener()
