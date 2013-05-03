@@ -28,6 +28,8 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		while ( !GlobalVector.getInstance().routeList.isEmpty())
+			GlobalVector.getInstance().routeList.remove(0);
 		btn = (Button)findViewById(R.id.find);
 		btn.setOnClickListener(new View.OnClickListener() {
 			

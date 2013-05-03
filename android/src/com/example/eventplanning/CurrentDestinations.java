@@ -7,11 +7,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class CurrentDestinations extends Activity {
@@ -71,6 +73,47 @@ public class CurrentDestinations extends Activity {
 				});
 				dialog.show();
 				return true;
+			}
+		});
+		
+		Button clear = (Button)findViewById(R.id.clear_all_destinations);
+		Button showR = (Button)findViewById(R.id.show_route);
+		
+		clear.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				AlertDialog.Builder dialog = new AlertDialog.Builder(CurrentDestinations.this);
+				final AlertDialog.Builder auxDialog = dialog; 
+				dialog.setMessage("Are you sure you want to delete all destination?");
+				dialog.setNegativeButton("Delete", new OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						while ( !GlobalVector.getInstance().routeList.isEmpty())
+							GlobalVector.getInstance().routeList.remove(0);
+						IntelGeolocation.MakeToast("All deleted!", cnt);
+						finish();
+					}				
+				});
+				dialog.setPositiveButton("Cancel", new OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						AlertDialog d = auxDialog.show();
+						d.dismiss();
+					}				
+				});
+				dialog.show();
+				
+			}
+		});
+		
+		showR.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+        		startActivity(i);
 			}
 		});
 	}
