@@ -11,10 +11,10 @@
     <com.example.eventplanning.ListBox
         android:id="@+id/listBox1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/RouteTextView2" >
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/save_route" >
 
     </com.example.eventplanning.ListBox>
 
@@ -35,5 +35,14 @@
         android:layout_below="@+id/RouteTextView1"
         android:text=" "
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <Button 
+        android:id="@+id/save_route"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RouteTextView2"
+        android:text="Save Route"
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

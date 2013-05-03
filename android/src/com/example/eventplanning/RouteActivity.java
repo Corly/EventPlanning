@@ -4,13 +4,14 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.smartIntern.server.ServerResponse;
@@ -22,6 +23,7 @@ public class RouteActivity extends Activity
 	private ListBox list;	
 	private TextView distanceTEXT;
 	private TextView timeTEXT;
+	private Button saveRoute;
 	
 	public void GetRoute(String token)
 	{
@@ -84,6 +86,13 @@ public class RouteActivity extends Activity
 			
 			final String time = distance;
 			timeTEXT.post(new Runnable(){public void run(){timeTEXT.setText(time);}});
+			
+			saveRoute.post(new Runnable() {
+				@Override
+				public void run() {
+					saveRoute.setVisibility(0);
+				}
+			});
 			
 			
 			final JSONArray obj = resp.getArrayData();
@@ -155,7 +164,8 @@ public class RouteActivity extends Activity
 		setContentView(R.layout.activity_route);
 		list = (ListBox) findViewById(R.id.listBox1);
 		distanceTEXT = (TextView) findViewById(R.id.RouteTextView1);
-		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);		
+		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
+		saveRoute = (Button) findViewById(R.id.save_route);
 		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
