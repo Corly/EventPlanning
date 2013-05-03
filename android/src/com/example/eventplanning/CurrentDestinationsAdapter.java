@@ -32,11 +32,16 @@ public class CurrentDestinationsAdapter extends BaseAdapter{
 	public long getItemId(int index) {
 		return index;
 	}
+	
+	public void remove(int index){
+		mItems.remove(mItems.get(index));
+	}
 
 	public View getView(int index, View convertView, ViewGroup parent) {
 		CurrentDestinationsView item;
 
-		item = new CurrentDestinationsView(mContext, mItems.get(index));
+		item = new CurrentDestinationsView(mContext, mItems.get(index), index);
+		item.setLongClickable(true);
 		return item;
 	}
 }

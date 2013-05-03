@@ -9,13 +9,18 @@
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true" >
         
+        	<RelativeLayout
+        	    android:layout_width="match_parent"
+        	    android:layout_height="match_parent" >
+        
         	<TextView
         	    android:id="@+id/current_dest_poi_name"
         	    android:layout_width="fill_parent"
         	    android:layout_height="wrap_content"
         	    android:textSize="20dp"
         	/>
-        
+        	
+        	 </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
