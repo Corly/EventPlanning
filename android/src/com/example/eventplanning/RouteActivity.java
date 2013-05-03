@@ -97,7 +97,16 @@ public class RouteActivity extends Activity
 					locationString+= text.charAt(k);
 				}
 				final String route = locationString;
-				list.post(new Runnable(){public void run(){list.InsertItem(route);}});
+				list.post(new Runnable(){
+					public void run(){
+						if ( route.startsWith("Arrive")){
+							list.InsertItem("You have reached the destination");
+						}
+						else {
+							list.InsertItem(route);
+						}
+					}
+				});
 			}
 			
 		} catch (ClientProtocolException e)
