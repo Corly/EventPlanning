@@ -109,15 +109,11 @@ public class RouteActivity extends Activity
 				});
 			}
 			
-		} catch (ClientProtocolException e)
+		} 
+		catch (Exception er)
 		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		} catch (JSONException e)
-		{
-			e.printStackTrace();
+			IntelGeolocation.MakeToast("Error creating route", cnt);
+			finish();
 		}
 	}
 	
@@ -159,8 +155,7 @@ public class RouteActivity extends Activity
 		setContentView(R.layout.activity_route);
 		list = (ListBox) findViewById(R.id.listBox1);
 		distanceTEXT = (TextView) findViewById(R.id.RouteTextView1);
-		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);
-		
+		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);		
 		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
