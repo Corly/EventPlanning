@@ -107,4 +107,11 @@ public class MainActivity extends Activity
 	    }
 		return false;
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		etext = (EditText) findViewById(R.id.edit_radius);
+		etext.setText("");
+	}
 }

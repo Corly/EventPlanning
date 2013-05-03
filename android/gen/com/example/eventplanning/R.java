@@ -32,30 +32,38 @@ public final class R {
     public static final class id {
         public static final int RouteTextView1=0x7f090007;
         public static final int RouteTextView2=0x7f090006;
+        public static final int btn_city=0x7f09000f;
+        public static final int btn_find=0x7f090011;
         public static final int choose=0x7f090000;
         public static final int clear_all_destinations=0x7f090009;
-        public static final int current_dest_poi_name=0x7f09000d;
+        public static final int current_dest_poi_name=0x7f090014;
         public static final int current_dest_tag=0x7f090008;
         public static final int edit_radius=0x7f090003;
         public static final int find=0x7f090004;
+        public static final int find_pois=0x7f09000d;
+        public static final int hint_city=0x7f09000e;
+        public static final int hint_find_location=0x7f090010;
         public static final int listBox1=0x7f090005;
-        public static final int make_route=0x7f090010;
-        public static final int poi_activitity_category_tag=0x7f09000b;
-        public static final int progress_bar=0x7f09000c;
+        public static final int make_route=0x7f090017;
+        public static final int poi_activitity_category_tag=0x7f090012;
+        public static final int progress_bar=0x7f090013;
         public static final int radius=0x7f090002;
-        public static final int restaurant_address=0x7f09000f;
-        public static final int restaurant_name=0x7f09000e;
-        public static final int show_current=0x7f090011;
+        public static final int restaurant_address=0x7f090016;
+        public static final int restaurant_name=0x7f090015;
+        public static final int show_current=0x7f090018;
         public static final int show_route=0x7f09000a;
         public static final int spinner1=0x7f090001;
+        public static final int title=0x7f09000c;
+        public static final int welcome=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_route=0x7f030001;
         public static final int current_destinations=0x7f030002;
-        public static final int restaurants=0x7f030003;
-        public static final int simple_current_destinations_list=0x7f030004;
-        public static final int simple_restaurant_list=0x7f030005;
+        public static final int front=0x7f030003;
+        public static final int restaurants=0x7f030004;
+        public static final int simple_current_destinations_list=0x7f030005;
+        public static final int simple_restaurant_list=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -64,7 +72,9 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
-        public static final int poi_choose=0x7f050004;
+        public static final int hint1=0x7f050004;
+        public static final int hint2=0x7f050005;
+        public static final int poi_choose=0x7f050006;
         public static final int title_activity_route=0x7f050003;
     }
     public static final class style {
