@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,8 +68,16 @@ public class POI extends Activity
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					if (GlobalVector.getInstance().routeList.isEmpty())
-		        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+					if (GlobalVector.getInstance().routeList.isEmpty()){
+		        		//Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
+						LatLng ll = new LatLng();
+						ll.name = mItems.get(pos).getName();
+						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
+						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
+						GlobalVector.getInstance().routeList.add(ll);
+						Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+		        		startActivity(i);
+					}
 		        	else 
 		        	{
 		        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
@@ -188,9 +197,18 @@ public class POI extends Activity
 			}
 		});
 		
-		   if ( !results_show) {
-		    	finish();
-		    }
+		final ProgressBar pb = (ProgressBar) findViewById(R.id.progress_bar);
+		pb.post(new Runnable() 
+		{
+			public void run()
+			{
+				pb.setVisibility(4);
+			}
+		});
+		
+		if ( !results_show) {
+		  	finish();
+	    }
 	}
 	
 	private String GetCategory(String category){

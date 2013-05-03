@@ -4,13 +4,28 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
     <TextView
         android:id="@+id/poi_activitity_category_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category:"
-        android:textSize="25dp"
+        android:textSize="27dp"
+        android:layout_alignParentLeft="true"
     />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:maxHeight="15dp"
+        android:maxWidth="15dp"
+        android:visibility="visible" />
+    
+    </RelativeLayout>
     
     <ListView 
         android:id="@android:id/list"
@@ -22,6 +37,5 @@
         android:orientation="vertical">
         
     </ListView>
-    
 
 </LinearLayout>
