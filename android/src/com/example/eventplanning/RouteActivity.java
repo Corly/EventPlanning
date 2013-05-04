@@ -183,7 +183,6 @@ public class RouteActivity extends Activity
 			InputStream in = new URL(data).openConnection().getInputStream();
 			Bitmap imageMAP = BitmapFactory.decodeStream(in);
 			//imageViewer.setImageBitmap(imageMAP);
-			//list.setBackgroundDrawable(background)
 			
 			
 		}

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/images" >
     
     <TextView 
         android:id="@+id/welcome"
@@ -62,6 +63,7 @@
         android:background="@drawable/button"
         android:paddingRight="20dp"
         android:text="From a city"
+        android:textColor="@android:color/black"
         android:textSize="13dp" />
     
     <TextView 
@@ -83,6 +85,7 @@
         android:layout_above="@id/hint_find_location"
         android:background="@drawable/button"
         android:text="From current location"
+        android:textColor="@android:color/black"
         android:textSize="13dp" />
 
 </RelativeLayout>

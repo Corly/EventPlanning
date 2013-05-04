@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/images"
     android:orientation="vertical" >
     
     <TextView 
@@ -12,15 +13,17 @@
         android:textSize="25dp"
     />
     
-    <ListView 
+    <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/current_dest_tag"
+        android:background="#00000000"
+        android:cacheColorHint="#00000000"
         android:divider="@android:color/background_light"
         android:dividerHeight="1dip"
-        android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:drawSelectorOnTop="false"
+        android:orientation="vertical" >
         
     </ListView>
     
