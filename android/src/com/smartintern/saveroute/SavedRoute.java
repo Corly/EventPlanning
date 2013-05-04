@@ -63,7 +63,14 @@ public class SavedRoute extends Activity{
 						adap.notifyDataSetChanged();
 						SavedRouteVector.getInstance().savedRoute.remove(position);
 						SavedRouteName.getInstance().savedRouteName.remove(position);
-						Toast.makeText(getApplicationContext() , "Deleted!" , Toast.LENGTH_SHORT).show();
+						
+						if ( SavedRouteVector.getInstance().savedRoute.isEmpty()){
+							Toast.makeText(getApplicationContext() , "All saved routes were deleted!" , Toast.LENGTH_SHORT).show();
+							finish();
+						}
+						else {
+							Toast.makeText(getApplicationContext() , "Deleted!" , Toast.LENGTH_SHORT).show();
+						}
 					}				
 				});
 				dialog.setPositiveButton("Cancel", new OnClickListener()

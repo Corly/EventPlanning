@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class CurrentDestinations extends Activity {
 	
@@ -60,6 +61,11 @@ public class CurrentDestinations extends Activity {
 						adap.mItems.remove(position);
 						adap.notifyDataSetChanged();
 						GlobalVector.getInstance().routeList.remove(position);
+						if ( GlobalVector.getInstance().routeList.isEmpty()){
+							Toast.makeText(getApplicationContext() , "All destinations were deleted!" , Toast.LENGTH_SHORT).show();
+							finish();
+						}
+						else
 						IntelGeolocation.MakeToast("Deleted!", cnt);
 					}				
 				});
