@@ -52,7 +52,7 @@ public class CurrentDestinations extends Activity {
 				final int position = pos;
 				AlertDialog.Builder dialog = new AlertDialog.Builder(cnt);
 				final AlertDialog.Builder auxDialog = dialog; 
-				dialog.setMessage("Are you sure you want to delete " + adap.mItems.get(position) + " from the current route?");
+				dialog.setMessage("Are you sure you want to delete " + "\"" + adap.mItems.get(position)+"\"" + " from the current route?");
 				dialog.setNegativeButton("Delete", new OnClickListener()
 				{
 					public void onClick(DialogInterface arg0, int arg1)
@@ -84,7 +84,7 @@ public class CurrentDestinations extends Activity {
 			public void onClick(View v) {
 				AlertDialog.Builder dialog = new AlertDialog.Builder(CurrentDestinations.this);
 				final AlertDialog.Builder auxDialog = dialog; 
-				dialog.setMessage("Are you sure you want to delete all destination?");
+				dialog.setMessage("Are you sure you want to delete all destinations?");
 				dialog.setNegativeButton("Delete", new OnClickListener()
 				{
 					public void onClick(DialogInterface arg0, int arg1)

@@ -75,6 +75,7 @@ public class RouteActivity extends Activity
 		creator.addArgument("route_algorithm", "FASTEST");
 		try
 		{
+			stringRoute = "";
 			final ServerResponse resp;
 			resp = creator.executeWithGetArray();
 			if (resp == null) return;
@@ -87,6 +88,7 @@ public class RouteActivity extends Activity
 				distance += str.charAt(i);
 			}
 			distance += " meters";
+			stringRoute = stringRoute + distance + "&";
 			
 			final String dist = distance;
 			distanceTEXT.post(new Runnable(){public void run(){distanceTEXT.setText(dist);}});
@@ -98,6 +100,7 @@ public class RouteActivity extends Activity
 				distance += str.charAt(i);
 			}
 			distance += " seconds";
+			stringRoute = stringRoute + distance + "&";
 			
 			final String time = distance;
 			timeTEXT.post(new Runnable(){public void run(){timeTEXT.setText(time);}});
@@ -109,7 +112,7 @@ public class RouteActivity extends Activity
 				}
 			});
 			
-			stringRoute = null;
+			
 			final JSONArray obj = resp.getArrayData();
 			for (int i =0;i<obj.length();i++)
 			{
@@ -124,10 +127,10 @@ public class RouteActivity extends Activity
 				final String route = locationString;
 				final int ind = i;
 				if ( route.startsWith("Arrive")){
-					stringRoute = stringRoute + "You have reached the destination" +"\n";
+					stringRoute = stringRoute + "You have reached the destination" +"&";
 				}
 				else {
-					stringRoute = stringRoute + locationString +"\n";
+					stringRoute = stringRoute + locationString +"&";
 				}
 				
 				list.post(new Runnable(){

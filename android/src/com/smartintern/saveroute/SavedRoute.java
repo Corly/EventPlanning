@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.eventplanning.CurrentDestinations;
+import com.example.eventplanning.GlobalVector;
 import com.example.eventplanning.IntelGeolocation;
 import com.example.eventplanning.R;
 
@@ -51,7 +54,7 @@ public class SavedRoute extends Activity{
 				final int position = pos;
 				AlertDialog.Builder dialog = new AlertDialog.Builder(cnt);
 				final AlertDialog.Builder auxDialog = dialog; 
-				dialog.setMessage("Are you sure you want to delete " + adap.mItems.get(position) + " from the saved routes?");
+				dialog.setMessage("Are you sure you want to delete " +"\""+ adap.mItems.get(position) + "\""+ " from the saved routes?");
 				dialog.setNegativeButton("Delete", new OnClickListener()
 				{
 					public void onClick(DialogInterface arg0, int arg1)
@@ -60,7 +63,7 @@ public class SavedRoute extends Activity{
 						adap.notifyDataSetChanged();
 						SavedRouteVector.getInstance().savedRoute.remove(position);
 						SavedRouteName.getInstance().savedRouteName.remove(position);
-						IntelGeolocation.MakeToast("Deleted!", cnt);
+						Toast.makeText(getApplicationContext() , "Deleted!" , Toast.LENGTH_SHORT).show();
 					}				
 				});
 				dialog.setPositiveButton("Cancel", new OnClickListener()
@@ -73,6 +76,39 @@ public class SavedRoute extends Activity{
 				});
 				dialog.show();
 				return true;
+			}
+		});
+		
+		Button clear = (Button)findViewById(R.id.clear_all_routes);
+		
+		clear.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				AlertDialog.Builder dialog = new AlertDialog.Builder(SavedRoute.this);
+				final AlertDialog.Builder auxDialog = dialog; 
+				dialog.setMessage("Are you sure you want to delete all routes?");
+				dialog.setNegativeButton("Delete", new OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						while ( !SavedRouteVector.getInstance().savedRoute.isEmpty()){
+							SavedRouteVector.getInstance().savedRoute.remove(0);
+							SavedRouteName.getInstance().savedRouteName.remove(0);
+						}
+						Toast.makeText(getApplicationContext() , "All deleted!" , Toast.LENGTH_SHORT).show();
+						finish();
+					}				
+				});
+				dialog.setPositiveButton("Cancel", new OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						AlertDialog d = auxDialog.show();
+						d.dismiss();
+					}				
+				});
+				dialog.show();
+				
 			}
 		});
 	}
