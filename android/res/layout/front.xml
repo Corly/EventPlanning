@@ -58,11 +58,11 @@
         android:id="@+id/btn_city"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="From a city"
-        android:paddingRight="20dp"
-        android:textSize="13dp"
         android:layout_above="@id/hint_city"
-     	/>
+        android:background="@drawable/button"
+        android:paddingRight="20dp"
+        android:text="From a city"
+        android:textSize="13dp" />
     
     <TextView 
         android:id="@+id/hint_find_location"
@@ -76,14 +76,13 @@
         android:paddingTop="5dp"
         />
         
-    <Button 
+    <Button
         android:id="@+id/btn_find"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="From current location"
-        android:textSize="13dp"
         android:layout_above="@id/hint_find_location"
-    />
-    
+        android:background="@drawable/button"
+        android:text="From current location"
+        android:textSize="13dp" />
 
 </RelativeLayout>

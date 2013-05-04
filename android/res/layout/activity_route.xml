@@ -45,4 +45,14 @@
         android:visibility="invisible"
         />
 
+    <ProgressBar
+        android:id="@+id/route_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:maxHeight="15dp"
+        android:maxWidth="15dp"
+        android:visibility="visible" />
+
 </RelativeLayout>

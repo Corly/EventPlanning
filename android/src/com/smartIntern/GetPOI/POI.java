@@ -140,6 +140,7 @@ public class POI extends Activity
 		if (!IntelGeolocation.isNetworkAvailable(cnt))
 		{
 			IntelGeolocation.MakeToast("No internet connection!", cnt);
+			finish();
 			return;
 		}
 		UrlCreator crt = new UrlCreator(cnt);

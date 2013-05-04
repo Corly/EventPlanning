@@ -1,4 +1,4 @@
-package com.smartintern.saveroute;
+package com.smartIntern.saveroute;
 
 import android.app.Activity;
 

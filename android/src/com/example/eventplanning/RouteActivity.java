@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.smartIntern.server.ServerResponse;
@@ -24,12 +25,14 @@ public class RouteActivity extends Activity
 	private TextView distanceTEXT;
 	private TextView timeTEXT;
 	private Button saveRoute;
+	private ProgressBar spinner;
 	
 	public void GetRoute(String token)
 	{
 		if (!IntelGeolocation.isNetworkAvailable(cnt))
 		{
 			IntelGeolocation.MakeToast("No internet connection!", cnt);
+			finish();
 			return;
 		}
 		UrlCreator creator = new UrlCreator(cnt);
@@ -166,6 +169,7 @@ public class RouteActivity extends Activity
 		distanceTEXT = (TextView) findViewById(R.id.RouteTextView1);
 		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
 		saveRoute = (Button) findViewById(R.id.save_route);
+		spinner = (ProgressBar)findViewById(R.id.route_progress);
 		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
@@ -173,7 +177,8 @@ public class RouteActivity extends Activity
 	        {
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
-	        	//GetStaticMapURL(token);	        	
+	        	//GetStaticMapURL(token);	
+	        	spinner.post(new Runnable(){public void run(){spinner.setVisibility(4);}});
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
