@@ -1,16 +1,21 @@
 package com.example.eventplanning;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +30,7 @@ public class RouteActivity extends Activity
 	private TextView timeTEXT;
 	private Button saveRoute;
 	private ProgressBar spinner;
+	//private ImageView imageViewer;
 	
 	public void GetRoute(String token)
 	{
@@ -108,9 +114,10 @@ public class RouteActivity extends Activity
 					locationString+= text.charAt(k);
 				}
 				final String route = locationString;
+				final int ind = i;
 				list.post(new Runnable(){
 					public void run(){
-						if ( route.startsWith("Arrive")){
+						if ( route.startsWith("Arrive") && ind == obj.length() - 1){
 							list.InsertItem("You have reached the destination");
 						}
 						else {
@@ -141,21 +148,49 @@ public class RouteActivity extends Activity
 		creator.addArgument("size", "480x480");
 		creator.addArgument("center", "44.43250,26.10389");
 		creator.addArgument("zoom", "14");
-		creator.addArgument("route","from:44.43250,26.10389%7Cto:44.435215,26.106804%7Calgorithm:FASTEST");
 		creator.addArgument("dpi","300");
+		
+		String routeArg = "";
+		LatLng point;
+		routeArg += "from:"+44.43250 + ","+26.10389+"%7C";
+		int size = GlobalVector.getInstance().routeList.size();
+		point = GlobalVector.getInstance().routeList.get(size-1);
+		routeArg += "to:"+point.lat+","+point.lng+"%7C";
+		routeArg+= "via:";
+		for (int i = 0;i<size - 2;i++)
+		{
+			point = GlobalVector.getInstance().routeList.get(i);
+			routeArg += (point.lat + "," + point.lng + ",");
+		}
+		
+		if (size >= 2)
+		{
+			point = GlobalVector.getInstance().routeList.get(size-2);
+			routeArg+= (point.lat + "," + point.lng);
+		}
+		
+		routeArg+="%7Calgorithm:FASTEST";
+		creator.addArgument("route", routeArg);
+		
+		
+		
 		try
 		{
 			String data = creator.executeWithGetHTTP();
 			int start = "{'data':{'url':".length() +1 ;
 			data = data.substring(start, data.length()-3);
 			Log.d("TEST",data);
+			InputStream in = new URL(data).openConnection().getInputStream();
+			Bitmap imageMAP = BitmapFactory.decodeStream(in);
+			//imageViewer.setImageBitmap(imageMAP);
+			//list.setBackgroundDrawable(background)
 			
-		} catch (ClientProtocolException e)
+			
+		}
+		catch (Exception er)
 		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{			
-			e.printStackTrace();
+			IntelGeolocation.MakeToast("Error fetching the map data!", cnt);
+			return;
 		}
 	}
 	
@@ -169,6 +204,8 @@ public class RouteActivity extends Activity
 		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
 		saveRoute = (Button) findViewById(R.id.save_route);
 		spinner = (ProgressBar)findViewById(R.id.route_progress);
+		//imageViewer = (ImageView)findViewById(R.id.imageView1);
+		
 		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
@@ -176,7 +213,7 @@ public class RouteActivity extends Activity
 	        {
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
-	        	//GetStaticMapURL(token);	
+	        	GetStaticMapURL(token);	
 	        	spinner.post(new Runnable(){public void run(){spinner.setVisibility(4);}});
 	        }    
 	    };

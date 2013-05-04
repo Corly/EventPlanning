@@ -15,6 +15,7 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
+        public static final int Dimension=0x7f040002;
         /**  Default screen margins, per the Android Design guidelines. 
 
          Customize dimensions originally defined in res/values/dimens.xml (such as
@@ -34,8 +35,8 @@ public final class R {
         public static final int mataglobe=0x7f020006;
     }
     public static final class id {
-        public static final int RouteTextView1=0x7f090007;
-        public static final int RouteTextView2=0x7f090008;
+        public static final int RouteTextView1=0x7f090008;
+        public static final int RouteTextView2=0x7f090007;
         public static final int btn_city=0x7f090011;
         public static final int btn_find=0x7f090013;
         public static final int choose=0x7f090000;
