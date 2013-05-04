@@ -12,14 +12,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smartIntern.server.ServerResponse;
+import com.smartintern.saveroute.SavedRouteName;
+import com.smartintern.saveroute.SavedRouteVector;
 
 public class RouteActivity extends Activity
 {
@@ -31,6 +37,7 @@ public class RouteActivity extends Activity
 	private Button saveRoute;
 	private ProgressBar spinner;
 	//private ImageView imageViewer;
+	private String stringRoute;
 	
 	public void GetRoute(String token)
 	{
@@ -102,7 +109,7 @@ public class RouteActivity extends Activity
 				}
 			});
 			
-			
+			stringRoute = null;
 			final JSONArray obj = resp.getArrayData();
 			for (int i =0;i<obj.length();i++)
 			{
@@ -113,8 +120,16 @@ public class RouteActivity extends Activity
 				{
 					locationString+= text.charAt(k);
 				}
+				
 				final String route = locationString;
 				final int ind = i;
+				if ( route.startsWith("Arrive")){
+					stringRoute = stringRoute + "You have reached the destination" +"\n";
+				}
+				else {
+					stringRoute = stringRoute + locationString +"\n";
+				}
+				
 				list.post(new Runnable(){
 					public void run(){
 						if ( route.startsWith("Arrive") && ind == obj.length() - 1){
@@ -217,7 +232,27 @@ public class RouteActivity extends Activity
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
-	    mythread.start();	
+	    mythread.start();
+	    
+	    saveRoute.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (stringRoute != null){
+					SavedRouteVector.getInstance().savedRoute.add(stringRoute);
+					Time time = new Time();
+					time.setToNow();
+					String name = Integer.toString(time.monthDay) + "-" + Integer.toString(time.month) +
+							"-" + Integer.toString(time.year) + "/" + Integer.toString(time.hour) + ":" +
+							Integer.toString(time.minute) + ":" + Integer.toString(time.second);
+					SavedRouteName.getInstance().savedRouteName.add(name);
+					Toast.makeText(getApplicationContext() , "Route saved" , Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Toast.makeText(getApplicationContext() , "No route to save" , Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 
 	@Override

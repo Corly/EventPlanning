@@ -35,6 +35,8 @@
         </activity>
         <activity android:name="com.example.eventplanning.CurrentDestinations">
         </activity>
+        <activity android:name="com.smartintern.saveroute.SavedRoute">
+        </activity>
         <activity android:name="com.example.eventplanning.MainActivity">
         </activity>
         <activity

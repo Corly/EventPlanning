@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.smartIntern.GetPOI.POI;
+import com.smartintern.saveroute.SavedRoute;
+import com.smartintern.saveroute.SavedRouteName;
 
 
 public class MainActivity extends Activity 
@@ -97,6 +99,17 @@ public class MainActivity extends Activity
 	        	else 
 	        	{
 	        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+	        		startActivity(i);
+	        	}
+	        	break;
+	        }
+	        
+	        case R.id.menu_saved_routes:
+	        {
+	        	if (SavedRouteName.getInstance().savedRouteName.isEmpty())
+	        		Toast.makeText(getApplicationContext() , "You do not have any saved routes" , Toast.LENGTH_SHORT).show();
+	        	else {
+	        		Intent i = new Intent(getApplicationContext(), SavedRoute.class);
 	        		startActivity(i);
 	        	}
 	        	break;

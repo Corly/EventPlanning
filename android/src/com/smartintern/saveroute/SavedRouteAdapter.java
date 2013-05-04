@@ -1,6 +1,8 @@
-package com.example.eventplanning;
+package com.smartintern.saveroute;
 
 import java.util.ArrayList;
+
+import com.example.eventplanning.CurrentDestinationsView;
 
 import android.content.Context;
 import android.view.View;
@@ -8,13 +10,12 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 
-public class CurrentDestinationsAdapter extends BaseAdapter{
-
+public class SavedRouteAdapter extends BaseAdapter{
 	ArrayList<String> mItems;
 	OnClickListener mOnItemClick;
 	Context mContext;
 
-	public CurrentDestinationsAdapter(Context context, ArrayList<String> items) {
+	public SavedRouteAdapter(Context context, ArrayList<String> items) {
 		mItems = new ArrayList<String>();
 		mContext = context;
 		mItems = items;
@@ -37,9 +38,9 @@ public class CurrentDestinationsAdapter extends BaseAdapter{
 	}
 
 	public View getView(int index, View convertView, ViewGroup parent) {
-		CurrentDestinationsView item;
+		SavedRouteView item;
 
-		item = new CurrentDestinationsView(mContext, mItems.get(index), index);
+		item = new SavedRouteView(mContext, mItems.get(index), index);
 		item.setLongClickable(true);
 		return item;
 	}
