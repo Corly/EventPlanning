@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Loading..."
+        android:text="Creating route..."
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:indeterminate="true"
         android:maxHeight="15dp"
         android:maxWidth="15dp"
         android:visibility="visible" />
