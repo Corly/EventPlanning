@@ -123,7 +123,7 @@ public class RouteActivity extends Activity
 		} 
 		catch (Exception er)
 		{
-			IntelGeolocation.MakeToast("Error creating route", cnt);
+			IntelGeolocation.MakeToast("Error creating route!", cnt);
 			finish();
 		}
 	}
