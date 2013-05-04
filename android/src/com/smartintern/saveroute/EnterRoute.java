@@ -17,6 +17,7 @@ public class EnterRoute extends Activity{
 	private ListView mListView;
 	private TextView distanceText;
 	private TextView timeText;
+	private TextView tagText;
 	private Context cnt;
 	private int poz;
 	
@@ -31,6 +32,8 @@ public class EnterRoute extends Activity{
 
 		distanceText = (TextView) findViewById(R.id.saved_route_distance);
 		timeText = (TextView) findViewById(R.id.saved_route_time);	
+		tagText = (TextView) findViewById(R.id.saved_route_tag);
+		
 		cnt = this;
 		poz = 0;
 		int i, j;
@@ -44,6 +47,8 @@ public class EnterRoute extends Activity{
 			return;
 		}
 
+		tagText.setText(SavedRouteName.getInstance().savedRouteName.get(whatRoute));
+		
 		String content = SavedRouteVector.getInstance().savedRoute.get(whatRoute);
 		ArrayList<String> mItems = new ArrayList<String>();
 		String distance = "";			
@@ -61,6 +66,7 @@ public class EnterRoute extends Activity{
 		}
 		timeText.setText(distance);
 		poz = i+1;
+		i=i+1;
 		String aux;
 		while (i<content.length()){
 			aux = "";

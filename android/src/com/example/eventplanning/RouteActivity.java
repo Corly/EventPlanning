@@ -245,9 +245,91 @@ public class RouteActivity extends Activity
 					SavedRouteVector.getInstance().savedRoute.add(stringRoute);
 					Time time = new Time();
 					time.setToNow();
-					String name = Integer.toString(time.monthDay) + "-" + Integer.toString(time.month) +
-							"-" + Integer.toString(time.year) + "/" + Integer.toString(time.hour) + ":" +
-							Integer.toString(time.minute) + ":" + Integer.toString(time.second);
+					String name = "";
+					if ( Integer.toString(time.monthDay).equals("1") || 
+						 Integer.toString(time.monthDay).equals("2") ||
+						 Integer.toString(time.monthDay).equals("3") ||
+						 Integer.toString(time.monthDay).equals("4") ||
+						 Integer.toString(time.monthDay).equals("5") ||
+						 Integer.toString(time.monthDay).equals("6") ||
+						 Integer.toString(time.monthDay).equals("7") ||
+						 Integer.toString(time.monthDay).equals("8") ||
+						 Integer.toString(time.monthDay).equals("9") ){
+						name = name + "0" + Integer.toString(time.monthDay);
+					}
+					else {
+						name = name + Integer.toString(time.monthDay);
+					}
+					
+					name = name + "/";
+					
+					if ( Integer.toString(time.month).equals("1") || 
+							 Integer.toString(time.month).equals("2") ||
+							 Integer.toString(time.month).equals("3") ||
+							 Integer.toString(time.month).equals("4") ||
+							 Integer.toString(time.month).equals("5") ||
+							 Integer.toString(time.month).equals("6") ||
+							 Integer.toString(time.month).equals("7") ||
+							 Integer.toString(time.month).equals("8") ||
+							 Integer.toString(time.month).equals("9") ){
+							name = name + "0" + Integer.toString(time.month);
+					}
+					else {
+						name = name + Integer.toString(time.month);
+					}
+					
+					name = name + "/";
+					name = name + Integer.toString(time.year) + "--";
+					
+					if ( Integer.toString(time.hour).equals("1") || 
+							 Integer.toString(time.hour).equals("2") ||
+							 Integer.toString(time.hour).equals("3") ||
+							 Integer.toString(time.hour).equals("4") ||
+							 Integer.toString(time.hour).equals("5") ||
+							 Integer.toString(time.hour).equals("6") ||
+							 Integer.toString(time.hour).equals("7") ||
+							 Integer.toString(time.hour).equals("8") ||
+							 Integer.toString(time.hour).equals("9") ){
+							name = name + "0" + Integer.toString(time.hour);
+					}
+					else{
+						name = name + Integer.toString(time.hour);
+					}
+					
+					name = name + ":";
+					
+					if ( Integer.toString(time.minute).equals("1") || 
+							 Integer.toString(time.minute).equals("2") ||
+							 Integer.toString(time.minute).equals("3") ||
+							 Integer.toString(time.minute).equals("4") ||
+							 Integer.toString(time.minute).equals("5") ||
+							 Integer.toString(time.minute).equals("6") ||
+							 Integer.toString(time.minute).equals("7") ||
+							 Integer.toString(time.minute).equals("8") ||
+							 Integer.toString(time.minute).equals("9") ){
+							name = name + "0" + Integer.toString(time.minute);
+					}
+					else{
+						name = name + Integer.toString(time.minute);
+					}
+					
+					name = name + ":";
+					
+					if ( Integer.toString(time.second).equals("1") || 
+							 Integer.toString(time.second).equals("2") ||
+							 Integer.toString(time.second).equals("3") ||
+							 Integer.toString(time.second).equals("4") ||
+							 Integer.toString(time.second).equals("5") ||
+							 Integer.toString(time.second).equals("6") ||
+							 Integer.toString(time.second).equals("7") ||
+							 Integer.toString(time.second).equals("8") ||
+							 Integer.toString(time.second).equals("9") ){
+							name = name + "0" + Integer.toString(time.second);
+					}
+					else {
+						name = name + Integer.toString(time.second);
+					}
+					
 					SavedRouteName.getInstance().savedRouteName.add(name);
 					Toast.makeText(getApplicationContext() , "Route saved" , Toast.LENGTH_SHORT).show();
 				}
