@@ -155,16 +155,16 @@ public class RouteActivity extends Activity
 		routeArg += "from:"+44.43250 + ","+26.10389+"%7C";
 		int size = GlobalVector.getInstance().routeList.size();
 		point = GlobalVector.getInstance().routeList.get(size-1);
-		routeArg += "to:"+point.lat+","+point.lng+"%7C";
-		routeArg+= "via:";
-		for (int i = 0;i<size - 2;i++)
-		{
-			point = GlobalVector.getInstance().routeList.get(i);
-			routeArg += (point.lat + "," + point.lng + ",");
-		}
+		routeArg += "to:"+point.lat+","+point.lng;
 		
-		if (size >= 2)
+		if (size >= 2) 
 		{
+			routeArg+= "%7Cvia:";
+			for (int i = 0;i<size - 2;i++)
+			{
+				point = GlobalVector.getInstance().routeList.get(i);
+				routeArg += (point.lat + "," + point.lng + ",");
+			}			
 			point = GlobalVector.getInstance().routeList.get(size-2);
 			routeArg+= (point.lat + "," + point.lng);
 		}
