@@ -9,19 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RouteActivity" >
 
-    <com.example.eventplanning.ListBox
-        android:id="@+id/listBox1"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_height="wrap_content" 
-        android:layout_below="@+id/save_route"
-        android:background="#00000000"
-        android:cacheColorHint="#00000000" 
-        >
-
-    </com.example.eventplanning.ListBox>
-
     <TextView
         android:id="@+id/RouteTextView2"
         android:layout_width="wrap_content"
@@ -40,12 +27,57 @@
         android:text="Creating route..."
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/show_current"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/RouteTextView2" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" >
+
+                <com.example.eventplanning.ListBox
+                    android:id="@+id/listBox1"
+                    android:layout_width="284dp"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:cacheColorHint="#00000000" >
+                </com.example.eventplanning.ListBox>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="279dp"
+                    android:layout_height="293dp"
+                    android:src="@drawable/nimic" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
     <ProgressBar
         android:id="@+id/route_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listBox1"
         android:indeterminate="true"
         android:maxHeight="15dp"
         android:maxWidth="15dp"
@@ -53,11 +85,22 @@
 
     <Button
         android:id="@+id/save_route"
-        android:layout_width="fill_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listBox1"
-        android:layout_below="@+id/RouteTextView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/show_current"
         android:text="Save Route"
-        android:visibility="invisible" />
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/show_current"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/save_route"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="Show_Click"
+        android:text="Show map" />
 
 </RelativeLayout>
