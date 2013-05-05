@@ -188,10 +188,7 @@ public class RouteActivity extends Activity
 		}
 		
 		routeArg+="%7Calgorithm:FASTEST";
-		creator.addArgument("route", routeArg);
-		
-		
-		
+		creator.addArgument("route", routeArg);	
 		try
 		{
 			String data = creator.executeWithGetHTTP();
