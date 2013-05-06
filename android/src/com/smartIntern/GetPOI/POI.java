@@ -61,13 +61,17 @@ public class POI extends Activity
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					
-					LatitudeLongitude ll = new LatitudeLongitude();
-					ll.name = mItems.get(pos).getName();
-					ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
-					ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
-					GlobalVector.getInstance().routeList.add(ll);
-					MakeToast("Done!");
+					if ( (GlobalVector.getInstance().routeList.get(GlobalVector.getInstance().routeList.size()-1).name).contentEquals(mItems.get(pos).getName())){
+						Toast.makeText(getApplicationContext() , "You just added this destinations to the route" , Toast.LENGTH_SHORT).show();
+					}
+					else{
+						LatitudeLongitude ll = new LatitudeLongitude();
+						ll.name = mItems.get(pos).getName();
+						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
+						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
+						GlobalVector.getInstance().routeList.add(ll);
+						MakeToast("Done!");
+					}
 				}				
 			});
 			dialog.setNegativeButton("Show Route", new OnClickListener()
@@ -75,7 +79,6 @@ public class POI extends Activity
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
 					if (GlobalVector.getInstance().routeList.isEmpty()){
-		        		//Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
 						LatitudeLongitude ll = new LatitudeLongitude();
 						ll.name = mItems.get(pos).getName();
 						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
