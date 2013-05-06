@@ -67,22 +67,50 @@ public class CurrentDestinations extends Activity {
 				{
 					public void onClick(DialogInterface arg0, int arg1)
 					{					
-						adap.mItems.remove(position);
-						adap.notifyDataSetChanged();
-						GlobalVector.getInstance().routeList.remove(position);
-						if ( GlobalVector.getInstance().routeList.isEmpty()){
-							Toast.makeText(getApplicationContext() , "All destinations were deleted!" , Toast.LENGTH_SHORT).show();
-							finish();
+						if ( !(position == 0 || position == adap.mItems.size()) ){
+							if (adap.mItems.get(position+1).contentEquals(adap.mItems.get(position-1))){
+								adap.mItems.remove(position+1);
+								adap.mItems.remove(position);
+								GlobalVector.getInstance().routeList.remove(position+1);
+								GlobalVector.getInstance().routeList.remove(position);
+								adap.notifyDataSetChanged();
+								if ( GlobalVector.getInstance().routeList.isEmpty()){
+									Toast.makeText(getApplicationContext() , "All destinations were deleted!" , Toast.LENGTH_SHORT).show();
+									finish();
+								}
+								else
+								IntelGeolocation.MakeToast("Deleted!", cnt);
+							}
+							else{
+								adap.mItems.remove(position);
+								adap.notifyDataSetChanged();
+								GlobalVector.getInstance().routeList.remove(position);
+								if ( GlobalVector.getInstance().routeList.isEmpty()){
+									Toast.makeText(getApplicationContext() , "All destinations were deleted!" , Toast.LENGTH_SHORT).show();
+									finish();
+								}
+								else
+								IntelGeolocation.MakeToast("Deleted!", cnt);
+							}
 						}
-						else
-						IntelGeolocation.MakeToast("Deleted!", cnt);
+						else{
+							adap.mItems.remove(position);
+							adap.notifyDataSetChanged();
+							GlobalVector.getInstance().routeList.remove(position);
+							if ( GlobalVector.getInstance().routeList.isEmpty()){
+								Toast.makeText(getApplicationContext() , "All destinations were deleted!" , Toast.LENGTH_SHORT).show();
+								finish();
+							}
+							else
+								IntelGeolocation.MakeToast("Deleted!", cnt);
+						}
 					}				
 				});
 				dialog.setPositiveButton("Cancel", new OnClickListener()
 				{
 					public void onClick(DialogInterface arg0, int arg1)
 					{					
-						AlertDialog d = auxDialog.show();
+						AlertDialog d = auxDialog.create();
 						d.dismiss();
 					}				
 				});

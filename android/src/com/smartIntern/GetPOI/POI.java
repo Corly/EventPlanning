@@ -61,10 +61,20 @@ public class POI extends Activity
 			{
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
-					if ( (GlobalVector.getInstance().routeList.get(GlobalVector.getInstance().routeList.size()-1).name).contentEquals(mItems.get(pos).getName())){
-						Toast.makeText(getApplicationContext() , "You just added this destinations to the route" , Toast.LENGTH_SHORT).show();
+					if ( GlobalVector.getInstance().routeList.size() != 0){
+						if ( (GlobalVector.getInstance().routeList.get(GlobalVector.getInstance().routeList.size()-1).name).contentEquals(mItems.get(pos).getName())){
+							Toast.makeText(getApplicationContext() , "You just added this destinations to the route" , Toast.LENGTH_SHORT).show();
+						}
+						else{
+							LatitudeLongitude ll = new LatitudeLongitude();
+							ll.name = mItems.get(pos).getName();
+							ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
+							ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
+							GlobalVector.getInstance().routeList.add(ll);
+							MakeToast("Done!");
+						}
 					}
-					else{
+					else {
 						LatitudeLongitude ll = new LatitudeLongitude();
 						ll.name = mItems.get(pos).getName();
 						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
