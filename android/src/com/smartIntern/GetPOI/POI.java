@@ -17,10 +17,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +48,8 @@ public class POI extends Activity
 	private String lng;
 	private Boolean results_show = true;
 	private ListView mListView;
+	
+	
 	private OnItemClickListener listener = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView<?> adapter, View view, int position, long id)
@@ -100,7 +105,6 @@ public class POI extends Activity
 		mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setEmptyView(findViewById(android.R.id.empty)); 
 		mListView.setOnItemClickListener(listener);
-		
 		mItems = new ArrayList<POIItem>();
 		
 		Bundle extras = getIntent().getExtras();

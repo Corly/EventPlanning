@@ -1,13 +1,17 @@
 package com.smartIntern.GetPOI;
 
+import android.R.color;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eventplanning.R;
 
-public class POIItemView extends LinearLayout {
+public class POIItemView extends LinearLayout 
+{
 	POIItem mItem;
 	Context mContext;
 

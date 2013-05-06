@@ -40,7 +40,6 @@ public class CurrentDestinationsAdapter extends BaseAdapter{
 		CurrentDestinationsView item;
 
 		item = new CurrentDestinationsView(mContext, mItems.get(index), index);
-		item.setLongClickable(true);
 		return item;
 	}
 }

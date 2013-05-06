@@ -47,7 +47,6 @@ public class FavoritedPointsAdapter extends BaseAdapter{
 		final int ind = index;
 
 		item = new FavoritedPointsView(mContext, mItems.get(index), index);
-		item.setLongClickable(true);
 		
 		item.setOnClickListener(new OnClickListener() {
 			

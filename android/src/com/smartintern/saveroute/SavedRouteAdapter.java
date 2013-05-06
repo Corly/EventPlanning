@@ -42,7 +42,6 @@ public class SavedRouteAdapter extends BaseAdapter{
 		final int ind = index;
 
 		item = new SavedRouteView(mContext, mItems.get(index), index);
-		item.setLongClickable(true);
 		
 		item.setOnClickListener(new OnClickListener() {
 
@@ -55,7 +54,6 @@ public class SavedRouteAdapter extends BaseAdapter{
 				mContext.startActivity(i);
 			}
 		});
-		item.setClickable(true);
 		
 		return item;
 	}
