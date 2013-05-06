@@ -23,7 +23,7 @@
         android:divider="@android:color/background_light"
         android:dividerHeight="1dip"
         android:drawSelectorOnTop="false"
-        android:listSelector="@drawable/button"
+        android:listSelector="@drawable/listselector"
         android:orientation="vertical" >
         
     </ListView>

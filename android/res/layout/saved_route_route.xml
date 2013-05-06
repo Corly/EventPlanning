@@ -40,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/show_current"
         android:layout_alignParentLeft="true"
-<<<<<<< HEAD
         android:layout_alignParentRight="true"
         android:layout_below="@+id/saved_route_time" >
 
@@ -61,7 +60,8 @@
         			android:layout_height="match_parent" 
         			android:background="#00000000"
         			android:cacheColorHint="#00000000"
-        			android:textAppearance="?android:attr/textAppearanceSmall" >
+        			android:textAppearance="?android:attr/textAppearanceSmall" 
+        			android:listSelector="@drawable/listselector">
 
    				</ListView>
                 
@@ -77,13 +77,6 @@
                     android:layout_width="279dp"
                     android:layout_height="293dp"
                     android:src="@drawable/nimic" />
-=======
-        android:layout_height="wrap_content" 
-        android:layout_below="@id/saved_route_time"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:cacheColorHint="#00000000" 
-        android:listSelector="@drawable/button">
->>>>>>> Highlights
 
             </LinearLayout>
         </RelativeLayout>

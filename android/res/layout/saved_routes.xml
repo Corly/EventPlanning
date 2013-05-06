@@ -30,7 +30,7 @@
         android:background="@android:color/transparent"
         android:cacheColorHint="#00000000"
         android:orientation="vertical"
-        android:listSelector="@drawable/button">
+        android:listSelector="@drawable/listselector">
         
     </ListView>
 		

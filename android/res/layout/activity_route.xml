@@ -52,7 +52,8 @@
                     android:layout_width="284dp"
                     android:layout_height="match_parent"
                     android:background="#00000000"
-                    android:cacheColorHint="#00000000" >
+                    android:cacheColorHint="#00000000" 
+                    android:listSelector="@drawable/listselector">
                 </com.example.eventplanning.ListBox>
             </LinearLayout>
 
