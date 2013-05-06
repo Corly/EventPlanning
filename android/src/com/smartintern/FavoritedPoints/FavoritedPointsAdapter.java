@@ -44,23 +44,7 @@ public class FavoritedPointsAdapter extends BaseAdapter{
 
 	public View getView(int index, View convertView, ViewGroup parent) {
 		FavoritedPointsView item;
-		final int ind = index;
-
-		item = new FavoritedPointsView(mContext, mItems.get(index), index);
-		
-		item.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(mContext, MainActivity.class);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.putExtra("title", "Route from "+ "\"" + FavoritedPointsVector.getInstance().favPoints.get(ind).name+"\"" + " point");
-				i.putExtra("lat", FavoritedPointsVector.getInstance().favPoints.get(ind).lat);
-				i.putExtra("lng", FavoritedPointsVector.getInstance().favPoints.get(ind).lng);
-				mContext.startActivity(i);	
-			}
-		});
-		
+		item = new FavoritedPointsView(mContext, mItems.get(index), index);		
 		return item;
 	}
 }

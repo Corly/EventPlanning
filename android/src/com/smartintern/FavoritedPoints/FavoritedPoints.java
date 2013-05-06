@@ -6,17 +6,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.eventplanning.MainActivity;
 import com.example.eventplanning.R;
 import com.smartintern.saveroute.SavedRoute;
 import com.smartintern.saveroute.SavedRouteAdapter;
@@ -51,6 +54,24 @@ public class FavoritedPoints extends Activity{
 		mListView.setAdapter(adapter);
 		
 		final FavoritedPointsAdapter adap = adapter;
+		
+		mListView.setOnItemClickListener(new OnItemClickListener()
+		{
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) 
+			{
+				Intent i = new Intent(cnt, MainActivity.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				i.putExtra("title", "Route from "+ "\"" + FavoritedPointsVector.getInstance().favPoints.get(arg2).name+"\"" + " point");
+				i.putExtra("lat", FavoritedPointsVector.getInstance().favPoints.get(arg2).lat);
+				i.putExtra("lng", FavoritedPointsVector.getInstance().favPoints.get(arg2).lng);
+				cnt.startActivity(i);	
+				
+			}
+		
+		});
 		
 		mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, 

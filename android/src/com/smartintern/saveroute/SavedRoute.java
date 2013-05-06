@@ -6,11 +6,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -50,6 +52,20 @@ public class SavedRoute extends Activity{
 		mListView.setAdapter(adapter);
 		
 		final SavedRouteAdapter adap = adapter;
+		
+		mListView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+			{
+				Bundle data = new Bundle();
+				data.putInt("whatRoute", arg2);
+				Intent i = new Intent(cnt, EnterRoute.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				i.putExtras(data);
+				cnt.startActivity(i);				
+			}			
+		});
 		
 		mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, 

@@ -39,22 +39,7 @@ public class SavedRouteAdapter extends BaseAdapter{
 
 	public View getView(int index, View convertView, ViewGroup parent) {
 		SavedRouteView item;
-		final int ind = index;
-
 		item = new SavedRouteView(mContext, mItems.get(index), index);
-		
-		item.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-				Bundle data = new Bundle();
-				data.putInt("whatRoute", ind);
-				Intent i = new Intent(mContext, EnterRoute.class);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.putExtras(data);
-				mContext.startActivity(i);
-			}
-		});
-		
 		return item;
 	}
 }
