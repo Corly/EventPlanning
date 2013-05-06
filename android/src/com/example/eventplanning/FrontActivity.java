@@ -55,11 +55,14 @@ public class FrontActivity extends Activity
 		
 		Button btnNormal = (Button)findViewById(R.id.btn_find);
 		Button btnFav = (Button)findViewById(R.id.btn_fav);
+<<<<<<< HEAD
 
 		
 		btnNormal.setOnTouchListener(touchListener);
 		btnFav.setOnTouchListener(touchListener);
 
+=======
+>>>>>>> Favorited Points finish.
 		
 		btnNormal.setOnClickListener(new OnClickListener() {
 			
