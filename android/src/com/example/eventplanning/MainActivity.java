@@ -30,7 +30,6 @@ public class MainActivity extends Activity
 	private String lng;
 	private String window_name;
 	
-<<<<<<< HEAD
 	private OnTouchListener touchListener = new OnTouchListener()
 	{
 
@@ -53,9 +52,6 @@ public class MainActivity extends Activity
 			return false;
 		}
 	};
-
-=======
->>>>>>> Favorited Points finish.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
