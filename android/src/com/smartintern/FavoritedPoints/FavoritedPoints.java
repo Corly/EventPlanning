@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventplanning.R;
@@ -32,6 +33,9 @@ public class FavoritedPoints extends Activity{
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.saved_routes);
+		
+		TextView tv = (TextView) findViewById(R.id.txt_saved);
+		tv.setText("Favorited points:");
 		
 		Toast.makeText(getApplicationContext() , "Hint: Long click to delete a favorited point" , Toast.LENGTH_SHORT).show();
 		

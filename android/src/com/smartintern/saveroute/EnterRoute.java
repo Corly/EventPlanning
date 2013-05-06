@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +23,26 @@ public class EnterRoute extends Activity{
 	private TextView tagText;
 	private Context cnt;
 	private int poz;
+	private ImageView imageViewer;
+	private Button showSomething;
+	private boolean whichisshown = false;
+	
+	private void Show()
+	{
+		if (!whichisshown)
+		{
+			imageViewer.setVisibility(View.INVISIBLE);
+			mListView.setVisibility(View.VISIBLE);
+			Log.d("TEST","Nebun?");
+			showSomething.setText("Show map");
+		}
+		else
+		{
+			mListView.setVisibility(View.INVISIBLE);
+			imageViewer.setVisibility(View.VISIBLE);
+			showSomething.setText("Show route");
+		}
+	}
 	
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,6 +56,8 @@ public class EnterRoute extends Activity{
 		distanceText = (TextView) findViewById(R.id.saved_route_distance);
 		timeText = (TextView) findViewById(R.id.saved_route_time);	
 		tagText = (TextView) findViewById(R.id.saved_route_tag);
+		imageViewer = (ImageView)findViewById(R.id.imageView1);
+		showSomething = (Button) findViewById(R.id.show_current);
 		
 		cnt = this;
 		poz = 0;
@@ -48,6 +73,8 @@ public class EnterRoute extends Activity{
 		}
 
 		tagText.setText(SavedRouteName.getInstance().savedRouteName.get(whatRoute));
+		imageViewer.setVisibility(View.INVISIBLE);
+		imageViewer.setImageBitmap(SavedRouteVector.getInstance().savedImage.get(whatRoute));
 		
 		String content = SavedRouteVector.getInstance().savedRoute.get(whatRoute);
 		ArrayList<String> mItems = new ArrayList<String>();
@@ -79,5 +106,12 @@ public class EnterRoute extends Activity{
 		
 		EnterRouteAdapter adapter = new EnterRouteAdapter(getApplicationContext(), mItems);
 		mListView.setAdapter(adapter);
+		
+	}
+	
+	public void Show_Click(View v)
+	{
+		whichisshown = !whichisshown;
+		Show();
 	}
 }

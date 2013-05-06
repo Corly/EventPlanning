@@ -38,7 +38,7 @@ public class RouteActivity extends Activity
 	private Button saveRoute;
 	private Button showSomething;
 	private ProgressBar spinner;
-
+	private Bitmap mapImageForSaving;
 	private String stringRoute;
 
 	private ImageView imageViewer;
@@ -176,7 +176,7 @@ public class RouteActivity extends Activity
 		}
 	}
 	
-	public void GetStaticMapURL(String token)
+	public Bitmap GetStaticMapURL(String token)
 	{
 		if (!IntelGeolocation.isNetworkAvailable(cnt))
 		{
@@ -220,12 +220,13 @@ public class RouteActivity extends Activity
 			Log.d("TEST",data);
 			InputStream in = new URL(data).openConnection().getInputStream();
 			final Bitmap imageMAP = BitmapFactory.decodeStream(in);
-			imageViewer.post(new Runnable(){public void run(){imageViewer.setImageBitmap(imageMAP);}});		
+			imageViewer.post(new Runnable(){public void run(){imageViewer.setImageBitmap(imageMAP);}});
+			return imageMAP;
 		}
 		catch (Exception er)
 		{
 			IntelGeolocation.MakeToast("Error fetching map data!", cnt);
-			return;
+			return null;
 		}
 	}
 	
@@ -249,7 +250,7 @@ public class RouteActivity extends Activity
 	        {
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
-	        	GetStaticMapURL(token);	
+	        	mapImageForSaving = GetStaticMapURL(token);	
 	        	spinner.post(new Runnable(){public void run(){spinner.setVisibility(View.GONE);}});
 	        	showSomething.post(new Runnable(){public void run(){showSomething.setVisibility(View.VISIBLE);}});
 	        }    
@@ -262,7 +263,6 @@ public class RouteActivity extends Activity
 			@Override
 			public void onClick(View v) {
 				if (stringRoute != null){
-					SavedRouteVector.getInstance().savedRoute.add(stringRoute);
 					AlertDialog.Builder dialog = new AlertDialog.Builder(RouteActivity.this);
 					final AlertDialog.Builder auxDialog = dialog;
 					dialog.setMessage("Choose a name for saving:");
@@ -272,6 +272,8 @@ public class RouteActivity extends Activity
 					{
 						public void onClick(DialogInterface arg0, int arg1)
 						{					
+							SavedRouteVector.getInstance().savedRoute.add(stringRoute);
+							SavedRouteVector.getInstance().savedImage.add(mapImageForSaving);
 							SavedRouteName.getInstance().savedRouteName.add(input.getText().toString()); 
 							Toast.makeText(getApplicationContext() , "Route saved" , Toast.LENGTH_SHORT).show();
 						}				
