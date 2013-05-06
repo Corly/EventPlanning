@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +36,31 @@ public class RouteActivity extends Activity
 	private TextView distanceTEXT;
 	private TextView timeTEXT;
 	private Button saveRoute;
+	private Button showSomething;
 	private ProgressBar spinner;
-	//private ImageView imageViewer;
+
 	private String stringRoute;
+
+	private ImageView imageViewer;
+	private boolean whichisshown = false;
+	
+	private void Show()
+	{
+		if (!whichisshown)
+		{
+			imageViewer.setVisibility(View.INVISIBLE);
+			list.setVisibility(View.VISIBLE);
+			Log.d("TEST","Nebun?");
+			showSomething.setText("Show map");
+		}
+		else
+		{
+			list.setVisibility(View.INVISIBLE);
+			imageViewer.setVisibility(View.VISIBLE);
+			showSomething.setText("Show route");
+		}
+	}
+
 	
 	public void GetRoute(String token)
 	{
@@ -157,7 +181,7 @@ public class RouteActivity extends Activity
 		if (!IntelGeolocation.isNetworkAvailable(cnt))
 		{
 			IntelGeolocation.MakeToast("No internet connection!", cnt);
-			return;
+			finish();
 		}
 		UrlCreator creator = new UrlCreator(cnt);
 		creator.setRequierment("staticurl");
@@ -187,10 +211,7 @@ public class RouteActivity extends Activity
 		}
 		
 		routeArg+="%7Calgorithm:FASTEST";
-		creator.addArgument("route", routeArg);
-		
-		
-		
+		creator.addArgument("route", routeArg);	
 		try
 		{
 			String data = creator.executeWithGetHTTP();
@@ -198,14 +219,12 @@ public class RouteActivity extends Activity
 			data = data.substring(start, data.length()-3);
 			Log.d("TEST",data);
 			InputStream in = new URL(data).openConnection().getInputStream();
-			Bitmap imageMAP = BitmapFactory.decodeStream(in);
-			//imageViewer.setImageBitmap(imageMAP);
-			
-			
+			final Bitmap imageMAP = BitmapFactory.decodeStream(in);
+			imageViewer.post(new Runnable(){public void run(){imageViewer.setImageBitmap(imageMAP);}});		
 		}
 		catch (Exception er)
 		{
-			IntelGeolocation.MakeToast("Error fetching the map data!", cnt);
+			IntelGeolocation.MakeToast("Error fetching map data!", cnt);
 			return;
 		}
 	}
@@ -220,8 +239,9 @@ public class RouteActivity extends Activity
 		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
 		saveRoute = (Button) findViewById(R.id.save_route);
 		spinner = (ProgressBar)findViewById(R.id.route_progress);
-		//imageViewer = (ImageView)findViewById(R.id.imageView1);
-		
+		imageViewer = (ImageView)findViewById(R.id.imageView1);
+		showSomething = (Button) findViewById(R.id.show_current);
+		Show();
 		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
@@ -230,7 +250,8 @@ public class RouteActivity extends Activity
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
 	        	GetStaticMapURL(token);	
-	        	spinner.post(new Runnable(){public void run(){spinner.setVisibility(4);}});
+	        	spinner.post(new Runnable(){public void run(){spinner.setVisibility(View.GONE);}});
+	        	showSomething.post(new Runnable(){public void run(){showSomething.setVisibility(View.VISIBLE);}});
 	        }    
 	    };
 	    Thread mythread = new Thread(runnable);
@@ -270,6 +291,12 @@ public class RouteActivity extends Activity
 				}
 			}
 		});
+	}
+	
+	public void Show_Click(View v)
+	{
+		whichisshown = !whichisshown;
+		Show();
 	}
 
 	@Override

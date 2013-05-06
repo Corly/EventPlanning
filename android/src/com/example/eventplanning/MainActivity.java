@@ -7,7 +7,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,6 +30,29 @@ public class MainActivity extends Activity
 	private String lng;
 	private String window_name;
 	
+	private OnTouchListener touchListener = new OnTouchListener()
+	{
+
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1)
+		{
+			switch (arg1.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+				{
+					arg0.setBackgroundResource(R.drawable.button_click2);
+					return false;
+				}
+				case MotionEvent.ACTION_UP:
+				{
+					arg0.setBackgroundResource(R.drawable.button2);
+					return false;
+				}
+			}
+			return false;
+		}
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -46,6 +71,7 @@ public class MainActivity extends Activity
 		while ( !GlobalVector.getInstance().routeList.isEmpty())
 			GlobalVector.getInstance().routeList.remove(0);
 		btn = (Button)findViewById(R.id.find);
+		btn.setOnTouchListener(touchListener);
 		btn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
