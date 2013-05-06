@@ -38,7 +38,7 @@
         android:id="@+id/horizontalScrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/show_current"
+        android:layout_above="@+id/linear_layout_savedr"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/saved_route_time" >
@@ -84,6 +84,7 @@
     </HorizontalScrollView>
     
      <LinearLayout
+        android:id="@+id/linear_layout_savedr"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">

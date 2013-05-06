@@ -95,6 +95,8 @@ public class POI extends Activity
 						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
 						GlobalVector.getInstance().routeList.add(ll);
 						Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+						i.putExtra("lat", lat);
+						i.putExtra("lng", lng);
 		        		startActivity(i);
 					}
 		        	else 
@@ -105,6 +107,8 @@ public class POI extends Activity
 						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
 						GlobalVector.getInstance().routeList.add(ll);
 		        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+		        		i.putExtra("lat", lat);
+		        		i.putExtra("lng", lng);
 		        		startActivity(i);
 		        	}
 				}				
@@ -283,6 +287,8 @@ public class POI extends Activity
 	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
 	        	else {
 	        		Intent i = new Intent(getApplicationContext(), CurrentDestinations.class);
+	        		i.putExtra("lat", lat);
+	        		i.putExtra("lng", lng);
 	        		startActivity(i);
 	        	}
 	        	break;
@@ -295,6 +301,8 @@ public class POI extends Activity
 	        	else 
 	        	{
 	        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+	        		i.putExtra("lat", lat);
+	        		i.putExtra("lng", lng);
 	        		startActivity(i);
 	        	}
 	        	break;

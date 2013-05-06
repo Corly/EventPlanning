@@ -33,6 +33,8 @@ public class CurrentDestinations extends Activity {
 	static final int DELTA = 50;
 	enum Direction {LEFT, RIGHT;};
 	float historicX = Float.NaN, historicY = Float.NaN;
+	private String lat;
+	private String lng;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,12 @@ public class CurrentDestinations extends Activity {
 		setContentView(R.layout.current_destinations);
 		
 		IntelGeolocation.MakeToast("Hint: Long click to delete a destination", cnt);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null){
+			lat = extras.getString("lat");
+			lng = extras.getString("lng");
+		}
 		
 		mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setEmptyView(findViewById(android.R.id.empty));
@@ -156,6 +164,8 @@ public class CurrentDestinations extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), RouteActivity.class);
+				i.putExtra("lat", lat);
+				i.putExtra("lng", lng);
         		startActivity(i);
 			}
 		});

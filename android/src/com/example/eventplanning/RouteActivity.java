@@ -34,7 +34,7 @@ import com.smartintern.saveroute.SavedRouteVector;
 public class RouteActivity extends Activity
 {
 
-	private Context cnt;
+	private Context cnt ;
 	private ListBox list;	
 	private TextView distanceTEXT;
 	private TextView timeTEXT;
@@ -43,6 +43,9 @@ public class RouteActivity extends Activity
 	private ProgressBar spinner;
 	private Bitmap mapImageForSaving;
 	private String stringRoute;
+	private String lat;
+	private String lng;
+	private String algoritmType;
 
 	private ImageView imageViewer;
 	private boolean whichisshown = false;
@@ -123,7 +126,7 @@ public class RouteActivity extends Activity
 		creator.setRequierment("route");
 		creator.addArgument("access_token", token);
 		int numberofpoints = GlobalVector.getInstance().routeList.size();
-		LatitudeLongitude origin = new LatitudeLongitude(44.43250,26.10389);
+		LatitudeLongitude origin = new LatitudeLongitude(Double.parseDouble(lat),Double.parseDouble(lng));
 		LatitudeLongitude dest = GlobalVector.getInstance().routeList.get(numberofpoints-1);
 		
 		creator.addArgument("origin_lat", origin.lat+"");
@@ -144,7 +147,7 @@ public class RouteActivity extends Activity
 			via_points +=  (point.lat + "," + point.lng);	
 		}
 		if (via_points != "" ) creator.addArgument("via_points_lat_lng",via_points);
-		creator.addArgument("route_algorithm", "FASTEST");
+		creator.addArgument("route_algorithm", algoritmType);
 		try
 		{
 			stringRoute = "";
@@ -207,7 +210,7 @@ public class RouteActivity extends Activity
 				
 				list.post(new Runnable(){
 					public void run(){
-						if ( route.startsWith("Arrive") && ind == obj.length() - 1){
+						if ( route.startsWith("Arrive") ){
 							list.InsertItem("You have reached the destination");
 						}
 						else {
@@ -246,7 +249,9 @@ public class RouteActivity extends Activity
 		
 		String routeArg = "";
 		LatitudeLongitude point;
-		routeArg += "from:"+origin.lat + ","+origin.lng+"%7C";
+
+		routeArg += "from:"+ lat + ","+ lng +"%7C";
+
 		int size = GlobalVector.getInstance().routeList.size();
 		point = GlobalVector.getInstance().routeList.get(size-1);
 		routeArg += "to:"+point.lat+","+point.lng;
@@ -263,7 +268,7 @@ public class RouteActivity extends Activity
 			routeArg+= (point.lat + "," + point.lng);
 		}
 		
-		routeArg+="%7Calgorithm:FASTEST";
+		routeArg+="%7Calgorithm:" + algoritmType;
 		creator.addArgument("route", routeArg);	
 		try
 		{
@@ -288,6 +293,15 @@ public class RouteActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route);
+
+		cnt = this;
+		Bundle extras = getIntent().getExtras();
+		if (extras != null){
+			lat = extras.getString("lat");
+			lng = extras.getString("lng");
+		}
+		
+		algoritmType = "n";
 		list = (ListBox) findViewById(R.id.listBox1);
 		distanceTEXT = (TextView) findViewById(R.id.RouteTextView1);
 		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
@@ -296,11 +310,20 @@ public class RouteActivity extends Activity
 		imageViewer = (ImageView)findViewById(R.id.imageView1);
 		showSomething = (Button) findViewById(R.id.show_current);
 		Show();
-		cnt = this;
 		Runnable runnable = new Runnable() 
 		{
 	        public void run() 
 	        {
+	        	boolean HasShown = false;
+	        	while (algoritmType.contentEquals("n"))
+	        	{
+	        		if (!HasShown)
+	        		{
+	        			HasShown = true;
+	        			ShowDialog(cnt);	        			
+	        		}
+	        	}
+	        	
 	        	String token = IntelGeolocation.GetAccessToken();
 	        	GetRoute(token);
 	        	mapImageForSaving = GetStaticMapURL(token);	
@@ -347,6 +370,46 @@ public class RouteActivity extends Activity
 				}
 			}
 		});
+	}
+	
+	public void ShowDialog(final Context cnt)
+	{
+		Activity activity = (Activity)cnt;
+		activity.runOnUiThread(new Runnable() 
+		{
+		    @Override
+		    public void run() 
+		    {
+		    	AlertDialog.Builder dialog = new AlertDialog.Builder(cnt);
+				final AlertDialog.Builder auxDialog = dialog;
+				dialog.setMessage("Choose your way of travelling");
+				dialog.setNegativeButton("By foot", new DialogInterface.OnClickListener()
+				{
+				public void onClick(DialogInterface arg0, int arg1)
+				{					
+					algoritmType = "PEDESTRIAN";
+					AlertDialog d = auxDialog.create();	
+					d.dismiss();
+				}				
+				});
+				dialog.setPositiveButton("By car", new DialogInterface.OnClickListener()
+				{
+				public void onClick(DialogInterface arg0, int arg1)
+					{					
+						algoritmType = "FASTEST";
+						AlertDialog d = auxDialog.create();
+						d.dismiss();
+					}				
+				});
+				dialog.show();
+		    }
+		});
+	}
+	
+	public void Show_Click(View v)
+	{
+		whichisshown = !whichisshown;
+		Show();
 	}
 	
 	@Override

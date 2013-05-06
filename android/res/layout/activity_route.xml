@@ -26,15 +26,38 @@
         android:layout_alignParentTop="true"
         android:text="Creating route..."
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <LinearLayout
+        android:id="@+id/linear_layout_route"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    <Button
+        android:id="@+id/save_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Save Route"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/show_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:onClick="Show_Click"
+        android:text="Show map" />
+    
+    </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/show_current"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/RouteTextView2" >
+        android:layout_below="@+id/RouteTextView2"
+        android:layout_above="@id/linear_layout_route">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -83,27 +106,5 @@
         android:maxHeight="15dp"
         android:maxWidth="15dp"
         android:visibility="visible" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-    <Button
-        android:id="@+id/save_route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Save Route"
-        android:visibility="visible" />
-
-    <Button
-        android:id="@+id/show_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:onClick="Show_Click"
-        android:text="Show map" />
-    
-    </LinearLayout>
 
 </RelativeLayout>
