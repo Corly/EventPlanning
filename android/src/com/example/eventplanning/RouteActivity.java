@@ -2,6 +2,7 @@ package com.example.eventplanning;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 
@@ -43,6 +44,8 @@ public class RouteActivity extends Activity
 
 	private ImageView imageViewer;
 	private boolean whichisshown = false;
+	private double eQuatorialEarthRadius = 6378.1370D;
+	private double d2r = (Math.PI / 180D);
 	
 	private void Show()
 	{
@@ -50,7 +53,6 @@ public class RouteActivity extends Activity
 		{
 			imageViewer.setVisibility(View.INVISIBLE);
 			list.setVisibility(View.VISIBLE);
-			Log.d("TEST","Nebun?");
 			showSomething.setText("Show map");
 		}
 		else
@@ -59,6 +61,51 @@ public class RouteActivity extends Activity
 			imageViewer.setVisibility(View.VISIBLE);
 			showSomething.setText("Show route");
 		}
+	}
+	
+	LatitudeLongitude getCenter(LatitudeLongitude origin , ArrayList<LatitudeLongitude> destinations)
+	{
+		LatitudeLongitude centerPoint = null;
+		double minLat = origin.lat, maxLat = origin.lat, minLng = origin.lng, maxLng = origin.lng;	
+		
+		for (int i = 0;i<destinations.size();i++)
+		{
+			LatitudeLongitude point = destinations.get(i);
+			minLat = Math.min(minLat, point.lat);
+			maxLat = Math.max(maxLat, point.lat);
+			minLng = Math.min(minLng, point.lng);
+			maxLng = Math.max(maxLng, point.lng);
+		}		
+		centerPoint = new LatitudeLongitude((minLat+maxLat)/2 , (minLng + maxLng)/2);		
+		return centerPoint;
+		
+	}
+	
+	private double HaversineInM(double lat1, double long1, double lat2, double long2)
+	{
+	    return 1000.0 * HaversineInKM(lat1, long1, lat2, long2);
+	}
+	
+	private double HaversineInKM(double lat1, double long1, double lat2, double long2)
+	{
+	    double dlong = (long2 - long1) * d2r;
+	    double dlat = (lat2 - lat1) * d2r;
+	    double a = Math.pow(Math.sin(dlat / 2D), 2D) + Math.cos(lat1 * d2r) * Math.cos(lat2 * d2r) * Math.pow(Math.sin(dlong / 2D), 2D);
+	    double c = 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1D - a));
+	    double d = eQuatorialEarthRadius * c;
+
+	    return d;
+	}
+	
+	private double LargestDistanceFromCenter(LatitudeLongitude center , ArrayList<LatitudeLongitude> destinations)
+	{
+		double maxDistance = -1.0;
+		int arraySize = destinations.size();
+		for (int i = 0;i<arraySize;i++)
+		{
+			maxDistance = Math.max(maxDistance, HaversineInM(center.lat,center.lng,destinations.get(i).lat,destinations.get(i).lng));
+		}
+		return maxDistance;
 	}
 
 	
@@ -183,17 +230,21 @@ public class RouteActivity extends Activity
 			IntelGeolocation.MakeToast("No internet connection!", cnt);
 			finish();
 		}
+		LatitudeLongitude origin = new LatitudeLongitude(44.43250 , 26.10389);// trebuie modificat.
+		LatitudeLongitude center = getCenter(origin,GlobalVector.getInstance().routeList);
+		double distanceMeters = LargestDistanceFromCenter(center,GlobalVector.getInstance().routeList);
+		Log.d("TEST",distanceMeters+"");
 		UrlCreator creator = new UrlCreator(cnt);
 		creator.setRequierment("staticurl");
 		creator.addArgument("access_token", token);
-		creator.addArgument("size", "480x480");
-		creator.addArgument("center", "44.43250,26.10389");
-		creator.addArgument("zoom", "14");
+		creator.addArgument("size", "600x600");
+		creator.addArgument("center", center.lat + "," + center.lng);
+		creator.addArgument("zoom", "16");
 		creator.addArgument("dpi","300");
 		
 		String routeArg = "";
 		LatitudeLongitude point;
-		routeArg += "from:"+44.43250 + ","+26.10389+"%7C";
+		routeArg += "from:"+origin.lat + ","+origin.lng+"%7C";
 		int size = GlobalVector.getInstance().routeList.size();
 		point = GlobalVector.getInstance().routeList.get(size-1);
 		routeArg += "to:"+point.lat+","+point.lng;

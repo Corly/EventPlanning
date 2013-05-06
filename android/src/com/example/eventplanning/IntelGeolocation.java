@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -65,6 +66,21 @@ public abstract class IntelGeolocation
 		ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+	
+	public static void MakeDialog(final String message , final Context cnt)
+	{
+		Activity activity = (Activity)cnt;
+		activity.runOnUiThread(new Runnable() 
+		{
+		    @Override
+		    public void run()
+		    {
+		    	AlertDialog.Builder dialog = new AlertDialog.Builder(cnt);
+		    	dialog.setMessage(message);
+    			dialog.show();	  
+		    }
+		});
 	}
 	
 	public static void MakeToast(final String message , final Context cnt)

@@ -180,20 +180,17 @@ public class POI extends Activity
 		try
 		{
 			resp = crt.executeWithGetArray();
-		} catch (ClientProtocolException e1)
+		}
+		catch (Exception er)
 		{
-			MakeToast("Server response error");
-			return;
-		} catch (IOException e1)
-		{
-			MakeToast("I/O error");
-			return;
+			IntelGeolocation.MakeToast("Server response error!", cnt);
+			finish();
 		}
 		
 		if (resp == null)
 		{
-			MakeToast("Server response error");
-			return;
+			MakeToast("Server response error! Please try again!");
+			finish();
 		}
 		
 		if (resp.getStatus() == false) {
@@ -210,9 +207,9 @@ public class POI extends Activity
 					mes.parseContent(arr.getJSONObject(i));
 					mItems.add(mes); // closest on top
 				}
-			} catch (JSONException e) {
+			} catch (Exception er) {
 				MakeToast("Server response format error");
-				return;
+				finish();
 			}
 		}
 		mListView.post(new Runnable()
