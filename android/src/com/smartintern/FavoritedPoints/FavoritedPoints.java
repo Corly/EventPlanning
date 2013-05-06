@@ -6,8 +6,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -21,10 +21,6 @@ import android.widget.Toast;
 
 import com.example.eventplanning.MainActivity;
 import com.example.eventplanning.R;
-import com.smartintern.saveroute.SavedRoute;
-import com.smartintern.saveroute.SavedRouteAdapter;
-import com.smartintern.saveroute.SavedRouteName;
-import com.smartintern.saveroute.SavedRouteVector;
 
 public class FavoritedPoints extends Activity{
 	

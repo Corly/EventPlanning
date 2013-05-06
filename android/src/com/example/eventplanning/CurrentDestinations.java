@@ -2,12 +2,6 @@ package com.example.eventplanning;
 
 import java.util.ArrayList;
 
-import com.smartintern.FavoritedPoints.FavoritedPoints;
-import com.smartintern.FavoritedPoints.FavoritedPointsVector;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
-import com.smartintern.saveroute.SavedRoute;
-import com.smartintern.saveroute.SavedRouteName;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -25,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.smartintern.FavoritedPoints.FavoritedPointsVector;
+import com.smartintern.FavoritedPoints.LatitudeLongitude;
 
 public class CurrentDestinations extends Activity {
 	

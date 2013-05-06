@@ -2,8 +2,6 @@ package com.smartintern.FavoritedPoints;
 
 import java.util.ArrayList;
 
-import com.smartintern.saveroute.SavedRouteVector;
-
 public final class FavoritedPointsVector {
 	private static final FavoritedPointsVector instance = new FavoritedPointsVector();
 	

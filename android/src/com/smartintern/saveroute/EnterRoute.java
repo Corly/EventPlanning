@@ -21,7 +21,7 @@ public class EnterRoute extends Activity{
 	private TextView distanceText;
 	private TextView timeText;
 	private TextView tagText;
-	private Context cnt;
+	private Context cnt = this;
 	private int poz;
 	private ImageView imageViewer;
 	private Button showSomething;

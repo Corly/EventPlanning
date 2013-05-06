@@ -2,17 +2,10 @@ package com.smartintern.FavoritedPoints;
 
 import java.util.ArrayList;
 
-import com.example.eventplanning.MainActivity;
-import com.smartintern.saveroute.EnterRoute;
-import com.smartintern.saveroute.SavedRouteView;
-
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.sax.StartElementListener;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class FavoritedPointsAdapter extends BaseAdapter{

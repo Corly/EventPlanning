@@ -1,25 +1,24 @@
 package com.smartIntern.GetPOI;
 
-import android.R.color;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eventplanning.R;
 
+@SuppressLint("ViewConstructor")
 public class POIItemView extends LinearLayout 
 {
 	POIItem mItem;
 	Context mContext;
 
-	public POIItemView(Context context, POIItem item) {
+	public POIItemView(Context context, POIItem item) 
+	{
 		super(context);
 		mContext = context;
 		mItem = item;
-
 		LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layoutInflater.inflate(R.layout.simple_restaurant_list, this, true);
 

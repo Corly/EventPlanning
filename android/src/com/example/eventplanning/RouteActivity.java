@@ -200,7 +200,6 @@ public class RouteActivity extends Activity
 				}
 				
 				final String route = locationString;
-				final int ind = i;
 				if ( route.startsWith("Arrive")){
 					stringRoute = stringRoute + "You have reached the destination" +"&";
 				}

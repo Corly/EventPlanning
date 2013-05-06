@@ -20,8 +20,6 @@ import android.widget.Toast;
 import com.smartIntern.GetPOI.POI;
 import com.smartintern.FavoritedPoints.FavoritedPointsVector;
 import com.smartintern.FavoritedPoints.LatitudeLongitude;
-import com.smartintern.saveroute.SavedRoute;
-import com.smartintern.saveroute.SavedRouteName;
 
 
 public class MainActivity extends Activity 

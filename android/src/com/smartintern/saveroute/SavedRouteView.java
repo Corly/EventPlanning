@@ -1,9 +1,8 @@
 package com.smartintern.saveroute;
 
-import android.widget.LinearLayout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.eventplanning.R;

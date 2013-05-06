@@ -6,8 +6,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -19,9 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.eventplanning.CurrentDestinations;
-import com.example.eventplanning.GlobalVector;
-import com.example.eventplanning.IntelGeolocation;
 import com.example.eventplanning.R;
 
 public class SavedRoute extends Activity{
