@@ -40,7 +40,7 @@ public final class R {
     public static final class id {
         public static final int RouteTextView1=0x7f090008;
         public static final int RouteTextView2=0x7f090007;
-        public static final int btn_city=0x7f090011;
+        public static final int btn_fav=0x7f090011;
         public static final int btn_find=0x7f090013;
         public static final int choose=0x7f090000;
         public static final int clear_all_destinations=0x7f09000b;
@@ -55,8 +55,10 @@ public final class R {
         public static final int listBox1=0x7f090005;
         public static final int list_enter_routes_name=0x7f09001c;
         public static final int list_saved_routes_name=0x7f09001f;
-        public static final int make_route=0x7f090020;
-        public static final int menu_saved_routes=0x7f090022;
+        public static final int make_route=0x7f090023;
+        public static final int menu_fav_points=0x7f090022;
+        public static final int menu_save_point=0x7f090020;
+        public static final int menu_saved_routes=0x7f090021;
         public static final int poi_activitity_category_tag=0x7f090014;
         public static final int progress_bar=0x7f090015;
         public static final int radius=0x7f090002;
@@ -67,7 +69,7 @@ public final class R {
         public static final int saved_route_distance=0x7f090017;
         public static final int saved_route_tag=0x7f090016;
         public static final int saved_route_time=0x7f090018;
-        public static final int show_current=0x7f090021;
+        public static final int show_current=0x7f090024;
         public static final int show_route=0x7f09000c;
         public static final int spinner1=0x7f090001;
         public static final int title=0x7f09000e;
@@ -88,7 +90,9 @@ public final class R {
         public static final int simple_saved_routes_list=0x7f03000a;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int current_destination=0x7f080000;
+        public static final int front=0x7f080001;
+        public static final int main=0x7f080002;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;

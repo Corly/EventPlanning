@@ -1,24 +1,23 @@
 package com.example.eventplanning;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -243,95 +242,28 @@ public class RouteActivity extends Activity
 			public void onClick(View v) {
 				if (stringRoute != null){
 					SavedRouteVector.getInstance().savedRoute.add(stringRoute);
-					Time time = new Time();
-					time.setToNow();
-					String name = "";
-					if ( Integer.toString(time.monthDay).equals("1") || 
-						 Integer.toString(time.monthDay).equals("2") ||
-						 Integer.toString(time.monthDay).equals("3") ||
-						 Integer.toString(time.monthDay).equals("4") ||
-						 Integer.toString(time.monthDay).equals("5") ||
-						 Integer.toString(time.monthDay).equals("6") ||
-						 Integer.toString(time.monthDay).equals("7") ||
-						 Integer.toString(time.monthDay).equals("8") ||
-						 Integer.toString(time.monthDay).equals("9") ){
-						name = name + "0" + Integer.toString(time.monthDay);
-					}
-					else {
-						name = name + Integer.toString(time.monthDay);
-					}
-					
-					name = name + "/";
-					
-					if ( Integer.toString(time.month).equals("1") || 
-							 Integer.toString(time.month).equals("2") ||
-							 Integer.toString(time.month).equals("3") ||
-							 Integer.toString(time.month).equals("4") ||
-							 Integer.toString(time.month).equals("5") ||
-							 Integer.toString(time.month).equals("6") ||
-							 Integer.toString(time.month).equals("7") ||
-							 Integer.toString(time.month).equals("8") ||
-							 Integer.toString(time.month).equals("9") ){
-							name = name + "0" + Integer.toString(time.month);
-					}
-					else {
-						name = name + Integer.toString(time.month);
-					}
-					
-					name = name + "/";
-					name = name + Integer.toString(time.year) + "--";
-					
-					if ( Integer.toString(time.hour).equals("1") || 
-							 Integer.toString(time.hour).equals("2") ||
-							 Integer.toString(time.hour).equals("3") ||
-							 Integer.toString(time.hour).equals("4") ||
-							 Integer.toString(time.hour).equals("5") ||
-							 Integer.toString(time.hour).equals("6") ||
-							 Integer.toString(time.hour).equals("7") ||
-							 Integer.toString(time.hour).equals("8") ||
-							 Integer.toString(time.hour).equals("9") ){
-							name = name + "0" + Integer.toString(time.hour);
-					}
-					else{
-						name = name + Integer.toString(time.hour);
-					}
-					
-					name = name + ":";
-					
-					if ( Integer.toString(time.minute).equals("1") || 
-							 Integer.toString(time.minute).equals("2") ||
-							 Integer.toString(time.minute).equals("3") ||
-							 Integer.toString(time.minute).equals("4") ||
-							 Integer.toString(time.minute).equals("5") ||
-							 Integer.toString(time.minute).equals("6") ||
-							 Integer.toString(time.minute).equals("7") ||
-							 Integer.toString(time.minute).equals("8") ||
-							 Integer.toString(time.minute).equals("9") ){
-							name = name + "0" + Integer.toString(time.minute);
-					}
-					else{
-						name = name + Integer.toString(time.minute);
-					}
-					
-					name = name + ":";
-					
-					if ( Integer.toString(time.second).equals("1") || 
-							 Integer.toString(time.second).equals("2") ||
-							 Integer.toString(time.second).equals("3") ||
-							 Integer.toString(time.second).equals("4") ||
-							 Integer.toString(time.second).equals("5") ||
-							 Integer.toString(time.second).equals("6") ||
-							 Integer.toString(time.second).equals("7") ||
-							 Integer.toString(time.second).equals("8") ||
-							 Integer.toString(time.second).equals("9") ){
-							name = name + "0" + Integer.toString(time.second);
-					}
-					else {
-						name = name + Integer.toString(time.second);
-					}
-					
-					SavedRouteName.getInstance().savedRouteName.add(name);
-					Toast.makeText(getApplicationContext() , "Route saved" , Toast.LENGTH_SHORT).show();
+					AlertDialog.Builder dialog = new AlertDialog.Builder(RouteActivity.this);
+					final AlertDialog.Builder auxDialog = dialog;
+					dialog.setMessage("Choose a name for saving:");
+					final EditText input = new EditText(RouteActivity.this);
+					dialog.setView(input);
+					dialog.setNegativeButton("Save", new DialogInterface.OnClickListener()
+					{
+						public void onClick(DialogInterface arg0, int arg1)
+						{					
+							SavedRouteName.getInstance().savedRouteName.add(input.getText().toString()); 
+							Toast.makeText(getApplicationContext() , "Route saved" , Toast.LENGTH_SHORT).show();
+						}				
+					});
+					dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener()
+					{
+						public void onClick(DialogInterface arg0, int arg1)
+						{					
+							AlertDialog d = auxDialog.show();
+							d.dismiss();
+						}				
+					});
+					dialog.show();
 				}
 				else {
 					Toast.makeText(getApplicationContext() , "No route to save" , Toast.LENGTH_SHORT).show();

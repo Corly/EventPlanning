@@ -41,6 +41,8 @@
         </activity>
         <activity android:name="com.example.eventplanning.MainActivity">
         </activity>
+        <activity android:name="com.smartintern.FavoritedPoints.FavoritedPoints">     
+        </activity>
         <activity
             android:name="com.example.eventplanning.RouteActivity"
             android:label="@string/title_activity_route" >

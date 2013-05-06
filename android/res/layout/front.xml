@@ -56,13 +56,13 @@
         />    
   	
     <Button
-        android:id="@+id/btn_city"
+        android:id="@+id/btn_fav"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/hint_city"
         android:background="@drawable/button"
         android:paddingRight="20dp"
-        android:text="From a city"
+        android:text="From a favorited point"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
     
@@ -70,7 +70,7 @@
         android:id="@+id/hint_find_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-   		android:layout_above="@id/btn_city"
+   		android:layout_above="@id/btn_fav"
         android:text="@string/hint1"
         android:textSize="11dp"
         android:paddingLeft="3dp"

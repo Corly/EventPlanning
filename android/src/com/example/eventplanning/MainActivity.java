@@ -24,12 +24,25 @@ public class MainActivity extends Activity
 	private Button btn;
 	private GlobalPositioning GP;
 	private EditText etext;
-
+	private String lat;
+	private String lng;
+	private String window_name;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Bundle extras = getIntent().getExtras();
+		if ( extras != null){
+			window_name = extras.getString("title");
+			lat = Double.toString(extras.getDouble("lat"));
+			lng = Double.toString(extras.getDouble("lng"));
+		}
+		
+		setTitle(window_name);
+		
 		while ( !GlobalVector.getInstance().routeList.isEmpty())
 			GlobalVector.getInstance().routeList.remove(0);
 		btn = (Button)findViewById(R.id.find);
@@ -48,6 +61,8 @@ public class MainActivity extends Activity
 					String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
 					String radius = etext.getText().toString();
 					Intent i = new Intent(getApplicationContext(), POI.class);
+					i.putExtra("lat", lat);
+					i.putExtra("lng", lng);
 					i.putExtra("category", category );
 					i.putExtra("radius", radius);
 					startActivity(i);

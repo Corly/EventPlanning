@@ -42,6 +42,8 @@ public class POI extends Activity
 	final Context cnt = this;
 	private String category;
 	private String radius;
+	private String lat;
+	private String lng;
 	private Boolean results_show = true;
 	private ListView mListView;
 	private OnItemClickListener listener = new OnItemClickListener()
@@ -95,7 +97,7 @@ public class POI extends Activity
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.restaurants);
-
+		
 		mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setEmptyView(findViewById(android.R.id.empty)); 
 		mListView.setOnItemClickListener(listener);
@@ -106,6 +108,8 @@ public class POI extends Activity
 		if (extras != null){
 			category = extras.getString("category");
 			radius = extras.getString("radius");
+			lat = extras.getString("lat");
+			lng = extras.getString("lng");
 		}
 		
 		TextView category_tag = (TextView)findViewById(R.id.poi_activitity_category_tag);
@@ -146,8 +150,8 @@ public class POI extends Activity
 		UrlCreator crt = new UrlCreator(cnt);
 		crt.setRequierment("poi");
 		crt.addArgument("access_token", IntelGeolocation.GetAccessToken());
-		crt.addArgument("lat", "44.43250");
-		crt.addArgument("lng", "26.10389");
+		crt.addArgument("lat", lat);
+		crt.addArgument("lng", lng);
 		crt.addArgument("category", GetCategory(category));// asta o sa il dam ca parametru la intent
 		crt.addArgument("radius", radius);
 		crt.addArgument("num_results", "50");

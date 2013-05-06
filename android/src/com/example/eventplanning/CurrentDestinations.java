@@ -2,6 +2,12 @@ package com.example.eventplanning;
 
 import java.util.ArrayList;
 
+import com.smartintern.FavoritedPoints.FavoritedPoints;
+import com.smartintern.FavoritedPoints.FavoritedPointsVector;
+import com.smartintern.FavoritedPoints.LatitudeLongitude;
+import com.smartintern.saveroute.SavedRoute;
+import com.smartintern.saveroute.SavedRouteName;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,11 +15,14 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -122,6 +131,59 @@ public class CurrentDestinations extends Activity {
         		startActivity(i);
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.current_destination, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) 
+	    {   
+    
+	        case R.id.menu_save_point:
+	        {
+	        	GlobalPositioning gp = new GlobalPositioning(CurrentDestinations.this);
+	    		final double lat = gp.getLocation().getLatitude();
+	    		final double lng = gp.getLocation().getLongitude();
+	        	AlertDialog.Builder dialog = new AlertDialog.Builder(CurrentDestinations.this);
+				final AlertDialog.Builder auxDialog = dialog;
+				dialog.setMessage("Choose a name for saving:");
+				final EditText input = new EditText(CurrentDestinations.this);
+				dialog.setView(input);
+				dialog.setNegativeButton("Save", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						LatitudeLongitude ll = new LatitudeLongitude();
+						ll.lat = lat;
+						ll.lng = lng;
+						ll.name = input.getText().toString(); 
+						
+						FavoritedPointsVector.getInstance().favPoints.add(ll);
+						Toast.makeText(getApplicationContext() , "Point saved" , Toast.LENGTH_SHORT).show();
+					}				
+				});
+				dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						AlertDialog d = auxDialog.show();
+						d.dismiss();
+					}				
+				});
+				dialog.show();
+				break;
+	        }
+	        	
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+		return false;
 	}
 	
 }

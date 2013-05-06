@@ -1,23 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/make_route"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Make Route"/>
-
-
-    <item 
-        android:id="@+id/show_current"
-        android:orderInCategory="2"
-        android:showAsAction="never"
-        android:title="Current Destinations"
-        />
     
     <item
+        android:id="@+id/menu_saved_routes"
+        android:orderInCategory="3"
+        android:showAsAction="never"
+        android:title="Saved Routes"
+        />
+    
+    <item 
+        android:id="@+id/menu_fav_points"
+        android:orderInCategory="2"
+        android:showAsAction="never"
+        android:title="Favorited Points"/>
+    
+    <item 
         android:id="@+id/menu_save_point"
         android:orderInCategory="1"
         android:showAsAction="never"
-        android:title="Save current location"
-        />
+        android:title="Save current location"/>
 </menu>
