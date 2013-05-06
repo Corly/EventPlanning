@@ -86,6 +86,11 @@ public class POI extends Activity
 					}
 		        	else 
 		        	{
+		        		LatitudeLongitude ll = new LatitudeLongitude();
+						ll.name = mItems.get(pos).getName();
+						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
+						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
+						GlobalVector.getInstance().routeList.add(ll);
 		        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
 		        		startActivity(i);
 		        	}

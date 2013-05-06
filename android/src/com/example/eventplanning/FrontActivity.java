@@ -2,6 +2,7 @@ package com.example.eventplanning;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -147,9 +148,9 @@ public class FrontActivity extends Activity
 				dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface arg0, int arg1)
-					{					
-						AlertDialog d = auxDialog.show();
-						d.dismiss();
+					{		
+						AlertDialog d = auxDialog.create();
+						d.cancel();
 					}				
 				});
 				dialog.show();
