@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartIntern.server.ServerResponse;
+import com.smartintern.FavoritedPoints.FavoritedPointsVector;
 import com.smartintern.FavoritedPoints.LatitudeLongitude;
 import com.smartintern.saveroute.SavedRouteName;
 import com.smartintern.saveroute.SavedRouteVector;
@@ -347,16 +349,57 @@ public class RouteActivity extends Activity
 		});
 	}
 	
-	public void Show_Click(View v)
-	{
-		whichisshown = !whichisshown;
-		Show();
-	}
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
+	public boolean onCreateOptionsMenu(Menu menu) 
 	{
+		getMenuInflater().inflate(R.menu.current_destination, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) 
+	    {   
+    
+	        case R.id.menu_save_point:
+	        {
+	        	GlobalPositioning gp = new GlobalPositioning(RouteActivity.this);
+	    		final double lat = gp.getLocation().getLatitude();
+	    		final double lng = gp.getLocation().getLongitude();
+	        	AlertDialog.Builder dialog = new AlertDialog.Builder(RouteActivity.this);
+				final AlertDialog.Builder auxDialog = dialog;
+				dialog.setMessage("Choose a name for saving:");
+				final EditText input = new EditText(RouteActivity.this);
+				dialog.setView(input);
+				dialog.setNegativeButton("Save", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						LatitudeLongitude ll = new LatitudeLongitude();
+						ll.lat = lat;
+						ll.lng = lng;
+						ll.name = input.getText().toString(); 
+						
+						FavoritedPointsVector.getInstance().favPoints.add(ll);
+						Toast.makeText(getApplicationContext() , "Point saved" , Toast.LENGTH_SHORT).show();
+					}				
+				});
+				dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface arg0, int arg1)
+					{					
+						AlertDialog d = auxDialog.create();
+						d.dismiss();
+					}				
+				});
+				dialog.show();
+				break;
+	        }
+	        	
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+		return false;
 	}
 
 }

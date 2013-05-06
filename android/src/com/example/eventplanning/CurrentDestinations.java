@@ -200,7 +200,7 @@ public class CurrentDestinations extends Activity {
 				{
 					public void onClick(DialogInterface arg0, int arg1)
 					{					
-						AlertDialog d = auxDialog.show();
+						AlertDialog d = auxDialog.create();
 						d.dismiss();
 					}				
 				});

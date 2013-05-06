@@ -2,6 +2,8 @@ package com.example.eventplanning;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.smartIntern.GetPOI.POI;
+import com.smartintern.FavoritedPoints.FavoritedPointsVector;
+import com.smartintern.FavoritedPoints.LatitudeLongitude;
 import com.smartintern.saveroute.SavedRoute;
 import com.smartintern.saveroute.SavedRouteName;
 
@@ -79,20 +83,23 @@ public class MainActivity extends Activity
 				if (etext.getText().toString().length() == 0){
 					Toast.makeText(getApplicationContext() , "Please enter a radius!" , Toast.LENGTH_SHORT).show();
 				}
-				else {
-					Location location = GP.getLocation();
-					if (location == null) return;
-					Spinner spinner = (Spinner)findViewById(R.id.spinner1);
-					String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
-					String radius = etext.getText().toString();
-					Intent i = new Intent(getApplicationContext(), POI.class);
-					i.putExtra("lat", lat);
-					i.putExtra("lng", lng);
-					i.putExtra("category", category );
-					i.putExtra("radius", radius);
-					startActivity(i);
+				else { if (etext.getText().toString().length() >= 10) {
+					Toast.makeText(getApplicationContext() , "Please enter a radius lower than 1000000000!" , Toast.LENGTH_SHORT).show();
+					}
+					else {
+						Location location = GP.getLocation();
+						if (location == null) return;
+						Spinner spinner = (Spinner)findViewById(R.id.spinner1);
+						String category = spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
+						String radius = etext.getText().toString();
+						Intent i = new Intent(getApplicationContext(), POI.class);
+						i.putExtra("lat", lat);
+						i.putExtra("lng", lng);
+						i.putExtra("category", category );
+						i.putExtra("radius", radius);
+						startActivity(i);
+					}
 				}
-				
 			}
 		});
 		
@@ -113,7 +120,7 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.current_destination, menu);
 		return true;
 	}
 	
@@ -121,39 +128,40 @@ public class MainActivity extends Activity
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) 
 	    {
-	        case R.id.show_current:
-	        {
-	        	if (GlobalVector.getInstance().routeList.isEmpty())
-	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
-	        	else {
-	        		Intent i = new Intent(getApplicationContext(), CurrentDestinations.class);
-	        		startActivity(i);
-	        	}
-	        	break;
-	        }
-	        
-	        case R.id.make_route:
-	        {
-	        	if (GlobalVector.getInstance().routeList.isEmpty())
-	        		Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
-	        	else 
-	        	{
-	        		Intent i = new Intent(getApplicationContext(), RouteActivity.class);
-	        		startActivity(i);
-	        	}
-	        	break;
-	        }
-	        
-	        case R.id.menu_saved_routes:
-	        {
-	        	if (SavedRouteName.getInstance().savedRouteName.isEmpty())
-	        		Toast.makeText(getApplicationContext() , "You do not have any saved routes" , Toast.LENGTH_SHORT).show();
-	        	else {
-	        		Intent i = new Intent(getApplicationContext(), SavedRoute.class);
-	        		startActivity(i);
-	        	}
-	        	break;
-	        }
+	    case R.id.menu_save_point:
+        {
+        	GlobalPositioning gp = new GlobalPositioning(MainActivity.this);
+    		final double lat = gp.getLocation().getLatitude();
+    		final double lng = gp.getLocation().getLongitude();
+        	AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+			final AlertDialog.Builder auxDialog = dialog;
+			dialog.setMessage("Choose a name for saving:");
+			final EditText input = new EditText(MainActivity.this);
+			dialog.setView(input);
+			dialog.setNegativeButton("Save", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface arg0, int arg1)
+				{					
+					LatitudeLongitude ll = new LatitudeLongitude();
+					ll.lat = lat;
+					ll.lng = lng;
+					ll.name = input.getText().toString(); 
+					
+					FavoritedPointsVector.getInstance().favPoints.add(ll);
+					Toast.makeText(getApplicationContext() , "Point saved" , Toast.LENGTH_SHORT).show();
+				}				
+			});
+			dialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener()
+			{
+				public void onClick(DialogInterface arg0, int arg1)
+				{					
+					AlertDialog d = auxDialog.create();
+					d.dismiss();
+				}				
+			});
+			dialog.show();
+			break;
+        }
 	        		
 	        default:
 	            return super.onOptionsItemSelected(item);
