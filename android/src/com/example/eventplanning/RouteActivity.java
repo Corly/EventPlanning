@@ -19,12 +19,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-	
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartIntern.server.ServerResponse;
+import com.smartintern.FavoritedPoints.LatitudeLongitude;
 import com.smartintern.saveroute.SavedRouteName;
 import com.smartintern.saveroute.SavedRouteVector;
 
@@ -74,8 +74,8 @@ public class RouteActivity extends Activity
 		creator.setRequierment("route");
 		creator.addArgument("access_token", token);
 		int numberofpoints = GlobalVector.getInstance().routeList.size();
-		LatLng origin = new LatLng(44.43250,26.10389);
-		LatLng dest = GlobalVector.getInstance().routeList.get(numberofpoints-1);
+		LatitudeLongitude origin = new LatitudeLongitude(44.43250,26.10389);
+		LatitudeLongitude dest = GlobalVector.getInstance().routeList.get(numberofpoints-1);
 		
 		creator.addArgument("origin_lat", origin.lat+"");
 		creator.addArgument("origin_lng", origin.lng+"");
@@ -83,7 +83,7 @@ public class RouteActivity extends Activity
 		creator.addArgument("destination_lng", dest.lng+"");
 		
 		String via_points = "";
-		LatLng point;
+		LatitudeLongitude point;
 		for (int i = 0;i<numberofpoints - 2;i++)
 		{
 			point = GlobalVector.getInstance().routeList.get(i);
@@ -192,7 +192,7 @@ public class RouteActivity extends Activity
 		creator.addArgument("dpi","300");
 		
 		String routeArg = "";
-		LatLng point;
+		LatitudeLongitude point;
 		routeArg += "from:"+44.43250 + ","+26.10389+"%7C";
 		int size = GlobalVector.getInstance().routeList.size();
 		point = GlobalVector.getInstance().routeList.get(size-1);
