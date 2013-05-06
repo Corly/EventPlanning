@@ -11,12 +11,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -30,11 +29,11 @@ import android.widget.Toast;
 import com.example.eventplanning.CurrentDestinations;
 import com.example.eventplanning.GlobalVector;
 import com.example.eventplanning.IntelGeolocation;
-import com.example.eventplanning.LatLng;
 import com.example.eventplanning.R;
 import com.example.eventplanning.RouteActivity;
 import com.example.eventplanning.UrlCreator;
 import com.smartIntern.server.ServerResponse;
+import com.smartintern.FavoritedPoints.LatitudeLongitude;
 
 public class POI extends Activity
 {
@@ -58,7 +57,7 @@ public class POI extends Activity
 				public void onClick(DialogInterface arg0, int arg1)
 				{					
 					
-					LatLng ll = new LatLng();
+					LatitudeLongitude ll = new LatitudeLongitude();
 					ll.name = mItems.get(pos).getName();
 					ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
 					ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
@@ -72,7 +71,7 @@ public class POI extends Activity
 				{					
 					if (GlobalVector.getInstance().routeList.isEmpty()){
 		        		//Toast.makeText(getApplicationContext() , "Your list of current destinations is empty" , Toast.LENGTH_SHORT).show();
-						LatLng ll = new LatLng();
+						LatitudeLongitude ll = new LatitudeLongitude();
 						ll.name = mItems.get(pos).getName();
 						ll.lat = Double.parseDouble(mItems.get(pos).getLatitude());
 						ll.lng = Double.parseDouble(mItems.get(pos).getLongitude());
