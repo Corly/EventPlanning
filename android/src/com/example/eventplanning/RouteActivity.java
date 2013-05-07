@@ -269,6 +269,18 @@ public class RouteActivity extends Activity
 		
 		routeArg+="%7Calgorithm:" + algoritmType;
 		creator.addArgument("route", routeArg);	
+		
+		String showArg = "";
+		showArg += origin.lat+","+origin.lng+"%7C";
+		for (int i = 0;i<size-1;i++)
+		{
+			point = GlobalVector.getInstance().routeList.get(i);
+			showArg += point.lat+","+point.lng+"%7C";
+		}
+		point = GlobalVector.getInstance().routeList.get(size-1);
+		showArg += point.lat+","+point.lng;
+		creator.addArgument("show", showArg);
+		
 		try
 		{
 			String data = creator.executeWithGetHTTP();
