@@ -65,8 +65,11 @@ public class FrontActivity extends Activity
 			public void onClick(View v) {
 				Intent i = new Intent(getApplication(), MainActivity.class);
 				//BASIC VALUES for testing. Change this when you finish!
-				i.putExtra("lat", 44.43250);
-				i.putExtra("lng", 26.10389);
+				GlobalPositioning gp = new GlobalPositioning(FrontActivity.this);
+	    		final double lat = gp.getLocation().getLatitude();
+	    		final double lng = gp.getLocation().getLongitude();
+				i.putExtra("lat", lat);
+				i.putExtra("lng", lng);
 				i.putExtra("title", "Route from current position");
 				startActivity(i);
 			}
