@@ -26,38 +26,45 @@
         android:layout_alignParentTop="true"
         android:text="Creating route..."
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-    <LinearLayout
+
+    <AbsoluteLayout
         android:id="@+id/linear_layout_route"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-    <Button
-        android:id="@+id/save_route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Save Route"
-        android:visibility="visible" />
+        android:layout_alignParentBottom="true" >
 
-    <Button
-        android:id="@+id/show_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:onClick="Show_Click"
-        android:text="Show map" />
-    
-    </LinearLayout>
+        <Button
+            android:id="@+id/save_route"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:layout_x="8dp"
+            android:layout_y="9dp"
+            android:background="@drawable/routebutton"
+            android:text="Save Route" 
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/show_current"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_x="156dp"
+            android:layout_y="8dp"
+            android:background="@drawable/routebutton"
+            android:text="Show Map"
+            android:visibility="visible" 
+            android:onClick="Show_Click"
+            android:textColor="#FFFFFF"/>
+
+    </AbsoluteLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/linear_layout_route"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/RouteTextView2"
-        android:layout_above="@id/linear_layout_route">
+        android:layout_below="@+id/RouteTextView2" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -75,8 +82,8 @@
                     android:layout_width="284dp"
                     android:layout_height="match_parent"
                     android:background="#00000000"
-                    android:cacheColorHint="#00000000" 
-                    android:listSelector="@drawable/listselector">
+                    android:cacheColorHint="#00000000"
+                    android:listSelector="@drawable/listselector" >
                 </com.example.eventplanning.ListBox>
             </LinearLayout>
 
@@ -90,10 +97,8 @@
                     android:layout_width="279dp"
                     android:layout_height="293dp"
                     android:src="@drawable/nimic" />
-
             </LinearLayout>
         </RelativeLayout>
-
     </HorizontalScrollView>
 
     <ProgressBar

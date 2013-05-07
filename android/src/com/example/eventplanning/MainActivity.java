@@ -42,7 +42,7 @@ public class MainActivity extends Activity
 			{
 				case MotionEvent.ACTION_DOWN:
 				{
-					arg0.setBackgroundResource(R.drawable.button_click2);
+					arg0.setBackgroundResource(R.drawable.button2click);
 					return false;
 				}
 				case MotionEvent.ACTION_UP:

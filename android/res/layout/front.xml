@@ -65,27 +65,28 @@
         android:text="From a favorited point"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
-    
-    <TextView 
-        android:id="@+id/hint_find_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-   		android:layout_above="@id/btn_fav"
-        android:text="@string/hint1"
-        android:textSize="11dp"
-        android:paddingLeft="3dp"
-        android:paddingBottom="50dp"
-        android:paddingTop="5dp"
-        />
-        
+
     <Button
         android:id="@+id/btn_find"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/hint_find_location"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:background="@drawable/button"
         android:text="From current location"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/hint_find_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_find"
+        android:paddingBottom="50dp"
+        android:paddingLeft="3dp"
+        android:paddingTop="5dp"
+        android:text="@string/hint1"
+        android:textSize="11dp" />
 
 </RelativeLayout>

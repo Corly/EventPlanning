@@ -16,8 +16,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +53,29 @@ public class RouteActivity extends Activity
 	private boolean whichisshown = false;
 	private double eQuatorialEarthRadius = 6378.1370D;
 	private double d2r = (Math.PI / 180D);
+	
+	OnTouchListener touchListener = new OnTouchListener()
+	{
+
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1)
+		{
+			switch (arg1.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+				{
+					arg0.setBackgroundResource(R.drawable.routebuttonclick);
+					return false;
+				}
+				case MotionEvent.ACTION_UP:
+				{
+					arg0.setBackgroundResource(R.drawable.routebutton);
+					return false;
+				}
+			}
+			return false;
+		}
+	};
 	
 	private void Show()
 	{
@@ -317,9 +342,11 @@ public class RouteActivity extends Activity
 		distanceTEXT = (TextView) findViewById(R.id.RouteTextView1);
 		timeTEXT = (TextView) findViewById(R.id.RouteTextView2);	
 		saveRoute = (Button) findViewById(R.id.save_route);
+		saveRoute.setOnTouchListener(touchListener);
 		spinner = (ProgressBar)findViewById(R.id.route_progress);
 		imageViewer = (ImageView)findViewById(R.id.imageView1);
 		showSomething = (Button) findViewById(R.id.show_current);
+		showSomething.setOnTouchListener(touchListener);
 		Show();
 		Runnable runnable = new Runnable() 
 		{

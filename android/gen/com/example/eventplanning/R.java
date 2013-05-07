@@ -31,23 +31,26 @@ public final class R {
     public static final class drawable {
         public static final int button=0x7f020000;
         public static final int button2=0x7f020001;
-        public static final int button_click=0x7f020002;
-        public static final int button_click2=0x7f020003;
-        public static final int close=0x7f020004;
-        public static final int close2=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int images=0x7f020007;
-        public static final int listselect=0x7f020008;
-        public static final int listselector=0x7f020009;
-        public static final int mapwasnotloaded=0x7f02000a;
-        public static final int mataglobe=0x7f02000b;
-        public static final int nimic=0x7f02000c;
+        public static final int button2click=0x7f020002;
+        public static final int button_click=0x7f020003;
+        public static final int button_click2=0x7f020004;
+        public static final int close=0x7f020005;
+        public static final int close2=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int images=0x7f020008;
+        public static final int listselect=0x7f020009;
+        public static final int listselector=0x7f02000a;
+        public static final int mapwasnotloaded=0x7f02000b;
+        public static final int mataglobe=0x7f02000c;
+        public static final int nimic=0x7f02000d;
+        public static final int routebutton=0x7f02000e;
+        public static final int routebuttonclick=0x7f02000f;
     }
     public static final class id {
         public static final int RouteTextView1=0x7f0a0006;
         public static final int RouteTextView2=0x7f0a0005;
         public static final int btn_fav=0x7f0a0015;
-        public static final int btn_find=0x7f0a0017;
+        public static final int btn_find=0x7f0a0016;
         public static final int choose=0x7f0a0000;
         public static final int clear_all_destinations=0x7f0a000f;
         public static final int clear_all_routes=0x7f0a001f;
@@ -57,7 +60,7 @@ public final class R {
         public static final int find=0x7f0a0004;
         public static final int find_pois=0x7f0a0013;
         public static final int hint_city=0x7f0a0014;
-        public static final int hint_find_location=0x7f0a0016;
+        public static final int hint_find_location=0x7f0a0017;
         public static final int horizontalScrollView1=0x7f0a000a;
         public static final int imageView1=0x7f0a000c;
         public static final int linear_layout_route=0x7f0a0007;
