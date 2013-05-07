@@ -4,19 +4,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/images"
     android:orientation="vertical" >
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/current_dest_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Destinations:"
-        android:textSize="25dp"
-    />
-    
+        android:textSize="25dp" />
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_above="@+id/linearLayout1"
         android:layout_below="@id/current_dest_tag"
         android:background="#00000000"
         android:cacheColorHint="#00000000"
@@ -25,27 +25,31 @@
         android:drawSelectorOnTop="false"
         android:listSelector="@drawable/listselector"
         android:orientation="vertical" >
-        
     </ListView>
-    
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-    <Button
-        android:id="@+id/clear_all_destinations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:text="Clear All" />
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/clear_all_destinations"
+            android:layout_width="123dp"
+            android:layout_height="37dp"
+            android:background="@drawable/routebutton"
+            android:text="Clear All"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/show_route"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="Show Route" />
-   
-    </LinearLayout>
+        android:layout_width="115dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:background="@drawable/routebutton"
+        android:text="Show Route"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

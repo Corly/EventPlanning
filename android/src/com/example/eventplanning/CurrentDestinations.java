@@ -11,8 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
@@ -32,12 +34,39 @@ public class CurrentDestinations extends Activity {
 	float historicX = Float.NaN, historicY = Float.NaN;
 	private String lat;
 	private String lng;
+	Button show_route , clear_all;
+	
+	OnTouchListener touchListener = new OnTouchListener()
+	{
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1)
+		{
+			switch (arg1.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+				{
+					arg0.setBackgroundResource(R.drawable.routebuttonclick);
+					return false;
+				}
+				case MotionEvent.ACTION_UP:
+				{
+					arg0.setBackgroundResource(R.drawable.routebutton);
+					return false;
+				}
+			}
+			return false;
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.current_destinations);
+		show_route = (Button)findViewById(R.id.show_route);
+		show_route.setOnTouchListener(touchListener);
+		clear_all = (Button)findViewById(R.id.clear_all_destinations);
+		clear_all.setOnTouchListener(touchListener);
 		
 		IntelGeolocation.MakeToast("Hint: Long click to delete a destination", cnt);
 		

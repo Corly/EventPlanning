@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/images"
     android:orientation="vertical" >
     
     <TextView 
@@ -13,11 +14,13 @@
         />
     
     <Button
-       	android:id="@+id/clear_all_routes"
-       	android:layout_width="fill_parent"
-       	android:layout_height="wrap_content"
-       	android:layout_alignParentBottom="true"
-       	android:text="Clear All" />
+        android:id="@+id/clear_all_routes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/clearbutton"
+        android:text="Clear All"
+        android:textColor = "#FFFFFF" />
     
     <ListView 
     	android:id="@android:id/list"

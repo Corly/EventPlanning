@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +28,28 @@ public class EnterRoute extends Activity{
 	private ImageView imageViewer;
 	private Button showSomething;
 	private boolean whichisshown = false;
+	
+	OnTouchListener touchListener = new OnTouchListener()
+	{
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1)
+		{
+			switch (arg1.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+				{
+					arg0.setBackgroundResource(R.drawable.routebuttonclick);
+					return false;
+				}
+				case MotionEvent.ACTION_UP:
+				{
+					arg0.setBackgroundResource(R.drawable.routebutton);
+					return false;
+				}
+			}
+			return false;
+		}
+	};
 	
 	private void Show()
 	{
@@ -58,6 +82,7 @@ public class EnterRoute extends Activity{
 		tagText = (TextView) findViewById(R.id.saved_route_tag);
 		imageViewer = (ImageView)findViewById(R.id.imageView1);
 		showSomething = (Button) findViewById(R.id.show_current);
+		showSomething.setOnTouchListener(touchListener);
 		
 		cnt = this;
 		poz = 0;

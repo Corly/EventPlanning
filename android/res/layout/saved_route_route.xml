@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/images"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -41,7 +42,7 @@
         android:layout_above="@+id/linear_layout_savedr"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/saved_route_time" >
+        android:layout_alignTop="@+id/saved_route_time" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -55,13 +56,13 @@
                 android:layout_centerHorizontal="true" >
                 
                 <ListView
-        			android:id="@android:id/list"
-     				android:layout_width="284dp"
-        			android:layout_height="match_parent" 
-        			android:background="#00000000"
-        			android:cacheColorHint="#00000000"
-        			android:textAppearance="?android:attr/textAppearanceSmall" 
-        			android:listSelector="@drawable/listselector">
+                    android:id="@android:id/list"
+                    android:layout_width="284dp"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:cacheColorHint="#00000000"
+                    android:listSelector="@drawable/listselector"
+                    android:textAppearance="?android:attr/textAppearanceSmall" >
 
    				</ListView>
                 
@@ -74,8 +75,8 @@
 
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="279dp"
-                    android:layout_height="293dp"
+                    android:layout_width="293dp"
+                    android:layout_height="342dp"
                     android:src="@drawable/nimic" />
 
             </LinearLayout>
@@ -84,18 +85,20 @@
     </HorizontalScrollView>
     
      <LinearLayout
-        android:id="@+id/linear_layout_savedr"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+         android:id="@+id/linear_layout_savedr"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true" >
 
-    <Button
-        android:id="@+id/show_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="Show_Click"
-        android:text="Show map" />
+         <Button
+             android:id="@+id/show_current"
+             android:layout_width="match_parent"
+             android:layout_height="39dp"
+             android:background="@drawable/routebutton"
+             android:onClick="Show_Click"
+             android:text="Show map"
+             android:textColor="#FFFFFF" />
     
     </LinearLayout>
 

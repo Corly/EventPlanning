@@ -9,8 +9,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -25,13 +27,37 @@ public class SavedRoute extends Activity{
 	
 	private ListView mListView;
 	private Context cnt = this;
+	private Button clearAll;
+	
+	OnTouchListener touchListener = new OnTouchListener()
+	{
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1)
+		{
+			switch (arg1.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+				{
+					arg0.setBackgroundResource(R.drawable.clearbuttonclick);
+					return false;
+				}
+				case MotionEvent.ACTION_UP:
+				{
+					arg0.setBackgroundResource(R.drawable.clearbutton);
+					return false;
+				}
+			}
+			return false;
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.saved_routes);
-		
+		clearAll = (Button)findViewById(R.id.clear_all_routes);
+		clearAll.setOnTouchListener(touchListener);
 		TextView tv = (TextView) findViewById(R.id.txt_saved);
 		tv.setText("Saved routes:");
 		
