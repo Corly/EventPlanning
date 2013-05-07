@@ -53,6 +53,9 @@ public class FrontActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.front);
 		
+		while ( !GlobalVector.getInstance().routeList.isEmpty())
+			GlobalVector.getInstance().routeList.remove(0);
+		
 		Button btnNormal = (Button)findViewById(R.id.btn_find);
 		Button btnFav = (Button)findViewById(R.id.btn_fav);
 		

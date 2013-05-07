@@ -37,7 +37,8 @@
         </activity>
         <activity android:name="com.smartintern.saveroute.SavedRoute">
         </activity>
-        <activity android:name="com.smartintern.saveroute.EnterRoute">
+        <activity android:name="com.smartintern.saveroute.EnterRoute"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.example.eventplanning.MainActivity">
         </activity>
@@ -45,7 +46,8 @@
         </activity>
         <activity
             android:name="com.example.eventplanning.RouteActivity"
-            android:label="@string/title_activity_route" >
+            android:label="@string/title_activity_route"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

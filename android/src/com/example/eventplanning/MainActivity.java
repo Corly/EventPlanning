@@ -69,8 +69,6 @@ public class MainActivity extends Activity
 		
 		setTitle(window_name);
 		
-		while ( !GlobalVector.getInstance().routeList.isEmpty())
-			GlobalVector.getInstance().routeList.remove(0);
 		btn = (Button)findViewById(R.id.find);
 		btn.setOnTouchListener(touchListener);
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +82,9 @@ public class MainActivity extends Activity
 				else { if (etext.getText().toString().length() >= 10) {
 					Toast.makeText(getApplicationContext() , "Please enter a radius lower than 1000000000!" , Toast.LENGTH_SHORT).show();
 					}
-					else {
+					else { if ( etext.getText().toString().startsWith("0")){
+						Toast.makeText(getApplicationContext() , "Please enter a radius that does not start with 0!" , Toast.LENGTH_SHORT).show();
+					} else {
 						Location location = GP.getLocation();
 						if (location == null) return;
 						Spinner spinner = (Spinner)findViewById(R.id.spinner1);
@@ -96,6 +96,7 @@ public class MainActivity extends Activity
 						i.putExtra("category", category );
 						i.putExtra("radius", radius);
 						startActivity(i);
+					}
 					}
 				}
 			}
