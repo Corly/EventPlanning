@@ -181,7 +181,7 @@ public class POI extends Activity
 		}
 		catch (Exception er)
 		{
-			IntelGeolocation.MakeToast("Server response error!", cnt);
+			IntelGeolocation.MakeToast("Server response error! Please try again!", cnt);
 			finish();
 		}
 		
@@ -191,10 +191,13 @@ public class POI extends Activity
 			finish();
 		}
 		
-		if (resp.getStatus() == false) {
+		if (resp.getStatus() == false) 
+		{
 			Toast.makeText(cnt, resp.getError(), Toast.LENGTH_SHORT).show();
-		} else {
-			try {
+		} else 
+		{
+			try 
+			{
 				JSONArray arr = resp.getArrayData();
 				if ( arr.length() == 0){
 					IntelGeolocation.MakeToast("No results were found!", cnt);
@@ -205,7 +208,8 @@ public class POI extends Activity
 					mes.parseContent(arr.getJSONObject(i));
 					mItems.add(mes); // closest on top
 				}
-			} catch (Exception er) {
+			} catch (Exception er) 
+			{
 				MakeToast("Server response format error");
 				finish();
 			}
