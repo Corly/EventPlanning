@@ -1,4 +1,4 @@
-EventPlanning
+OutGoing Planner
 =============
 
 smartIntern project
