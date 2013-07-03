@@ -1,4 +1,4 @@
-package com.smartintern.saveroute;
+package com.smartIntern.saveroute;
 
 import java.util.ArrayList;
 
@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;

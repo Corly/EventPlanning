@@ -29,8 +29,8 @@ import com.example.eventplanning.IntelGeolocation;
 import com.example.eventplanning.R;
 import com.example.eventplanning.RouteActivity;
 import com.example.eventplanning.UrlCreator;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
 import com.smartIntern.server.ServerResponse;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
 
 public class POI extends Activity
 {

@@ -1,4 +1,4 @@
-package com.smartintern.saveroute;
+package com.smartIntern.saveroute;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;

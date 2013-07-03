@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.smartIntern.FavoritedPoints.FavoritedPointsVector;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
 import com.smartIntern.GetPOI.POI;
-import com.smartintern.FavoritedPoints.FavoritedPointsVector;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
 
 
 public class MainActivity extends Activity 

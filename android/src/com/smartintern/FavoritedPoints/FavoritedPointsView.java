@@ -1,4 +1,4 @@
-package com.smartintern.FavoritedPoints;
+package com.smartIntern.FavoritedPoints;
 
 import android.content.Context;
 import android.view.LayoutInflater;

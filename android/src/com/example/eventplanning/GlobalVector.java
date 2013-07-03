@@ -2,7 +2,7 @@ package com.example.eventplanning;
 
 import java.util.ArrayList;
 
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
 
 public final class GlobalVector {
 	private static final GlobalVector instance = new GlobalVector();

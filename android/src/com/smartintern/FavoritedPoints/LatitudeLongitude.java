@@ -1,4 +1,4 @@
-package com.smartintern.FavoritedPoints;
+package com.smartIntern.FavoritedPoints;
 
 public class LatitudeLongitude {
 	public String name;

@@ -15,11 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.smartintern.FavoritedPoints.FavoritedPoints;
-import com.smartintern.FavoritedPoints.FavoritedPointsVector;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
-import com.smartintern.saveroute.SavedRoute;
-import com.smartintern.saveroute.SavedRouteName;
+import com.smartIntern.FavoritedPoints.FavoritedPoints;
+import com.smartIntern.FavoritedPoints.FavoritedPointsVector;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
+import com.smartIntern.saveroute.SavedRoute;
+import com.smartIntern.saveroute.SavedRouteName;
 
 public class FrontActivity extends Activity
 {

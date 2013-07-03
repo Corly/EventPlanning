@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
@@ -22,8 +22,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.smartintern.FavoritedPoints.FavoritedPointsVector;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
+import com.smartIntern.FavoritedPoints.FavoritedPointsVector;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
+
 
 public class CurrentDestinations extends Activity {
 	

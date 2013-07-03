@@ -27,11 +27,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.smartIntern.FavoritedPoints.FavoritedPointsVector;
+import com.smartIntern.FavoritedPoints.LatitudeLongitude;
+import com.smartIntern.saveroute.SavedRouteName;
+import com.smartIntern.saveroute.SavedRouteVector;
 import com.smartIntern.server.ServerResponse;
-import com.smartintern.FavoritedPoints.FavoritedPointsVector;
-import com.smartintern.FavoritedPoints.LatitudeLongitude;
-import com.smartintern.saveroute.SavedRouteName;
-import com.smartintern.saveroute.SavedRouteVector;
 
 public class RouteActivity extends Activity
 {
